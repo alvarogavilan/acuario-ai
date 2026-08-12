@@ -1,122 +1,29 @@
 {
-  "aquarium": {
-    "name": "Reef 130 L",
-    "volumeLiters": 130,
-    "type": "marine",
-    "location": "Sevilla 41020",
-    "status": "baseline",
-    "startedApprox": "2023",
-    "goals": ["estabilizar temperatura", "eliminar dependencia de agua de red", "recuperar skimmer", "volver a mantener coral"]
-  },
-  "livestock": [
-    {
-      "id": "fish-clown-pair",
-      "kind": "fish",
-      "commonName": "Pareja de peces payaso",
-      "scientificName": "Amphiprion ocellaris",
-      "count": 2,
-      "status": "alive",
-      "confidence": 0.94,
-      "shop": "Masterfish",
-      "purchasePrice": null,
-      "marketPrice": null,
-      "image": "https://www.monaconatureencyclopedia.com/wp-content/uploads/2008/08/1-Amphiprion-ocellaris-%C2%A9-Giuseppe-Mazza.jpg",
-      "individuals": [
-        {"id":"clown-female","label":"Hembra","sex":"female","status":"alive"},
-        {"id":"clown-male","label":"Macho","sex":"male","status":"alive"}
-      ],
-      "notes": "Pareja confirmada por el propietario: una hembra y un macho."
-    },
-    {
-      "id": "fish-blue-tang-1",
-      "kind": "fish",
-      "commonName": "Cirujano azul",
-      "scientificName": "Paracanthurus hepatus",
-      "count": 1,
-      "status": "alive",
-      "confidence": 0.99,
-      "shop": "Masterfish",
-      "purchaseSize": "S",
-      "purchasePrice": null,
-      "marketPrice": 82.94,
-      "marketCurrency": "EUR",
-      "marketSource": "MasterFisch",
-      "marketCheckedAt": "2026-08-12",
-      "marketUrl": "https://www.masterfisch.es/peces-marinos-pez-cirujano/585-blue-tang.html",
-      "image": "https://tonysharks.com/Tree_of_life/Eukaryote/Opisthokonta/Nanyouhagi/IMG_0123.JPG",
-      "notes": "Comprado en Masterfish en talla S. El precio de mercado mostrado es la referencia actual de la ficha de MasterFisch y puede variar según talla; no representa el precio histórico pagado."
-    },
-    {
-      "id": "fish-blue-yellow-1",
-      "kind": "fish",
-      "commonName": "Damisela azul cola amarilla",
-      "scientificName": "Chrysiptera parasema",
-      "count": 1,
-      "status": "alive",
-      "confidence": 0.88,
-      "shop": "Masterfish",
-      "purchasePrice": null,
-      "marketPrice": 17.35,
-      "marketCurrency": "EUR",
-      "marketSource": "MasterFisch",
-      "marketCheckedAt": "2026-08-12",
-      "marketUrl": "https://www.masterfisch.es/peces-marinos-damisela/676-yellow-tail-azure-damsel.html",
-      "image": null,
-      "notes": "Identificación probable por patrón azul intenso y cola amarilla. Mantener como identificación de alta probabilidad hasta una nueva foto lateral."
-    },
-    {
-      "id": "cleanup-bee-snails",
-      "kind": "invertebrate",
-      "commonName": "Caracoles abeja",
-      "scientificName": "Pendiente de confirmar",
-      "count": 3,
-      "countMin": 2,
-      "countMax": 3,
-      "countIsEstimate": true,
-      "status": "alive",
-      "confidence": 0.45,
-      "shop": null,
-      "purchasePrice": null,
-      "marketPrice": null,
-      "image": null,
-      "notes": "El propietario estima que quedan 2–3 ejemplares; varios del equipo de limpieza han muerto."
-    }
+  "aquarium":{"name":"Reef 130 L","volumeLiters":130,"type":"marine","location":"Sevilla 41020","status":"baseline","startedApprox":"2023","goals":["estabilizar temperatura","eliminar dependencia de agua de red","recuperar skimmer","volver a mantener coral"]},
+  "livestock":[
+    {"id":"fish-clown-pair","kind":"fish","commonName":"Pareja de peces payaso","scientificName":"Amphiprion ocellaris","count":2,"status":"alive","confidence":0.94,"shop":"Masterfish","purchasePrice":null,"marketPrice":null,"image":"https://www.monaconatureencyclopedia.com/wp-content/uploads/2008/08/1-Amphiprion-ocellaris-%C2%A9-Giuseppe-Mazza.jpg","individuals":[{"id":"clown-female","label":"Hembra","sex":"female","status":"alive"},{"id":"clown-male","label":"Macho","sex":"male","status":"alive"}],"notes":"Pareja confirmada por el propietario: una hembra y un macho."},
+    {"id":"fish-blue-tang-1","kind":"fish","commonName":"Cirujano azul","scientificName":"Paracanthurus hepatus","count":1,"status":"alive","confidence":0.99,"shop":"Masterfish","purchaseSize":"S","purchasePrice":null,"marketPrice":82.94,"marketCurrency":"EUR","marketSource":"MasterFisch","marketCheckedAt":"2026-08-12","marketUrl":"https://www.masterfisch.es/peces-marinos-pez-cirujano/585-blue-tang.html","image":"https://tonysharks.com/Tree_of_life/Eukaryote/Opisthokonta/Nanyouhagi/IMG_0123.JPG","notes":"Comprado en Masterfish en talla S. El precio de mercado mostrado es referencia actual, no el histórico pagado."},
+    {"id":"fish-blue-yellow-1","kind":"fish","commonName":"Damisela azul cola amarilla","scientificName":"Chrysiptera parasema","count":1,"status":"alive","confidence":0.88,"shop":"Masterfish","purchasePrice":null,"marketPrice":17.35,"marketCurrency":"EUR","marketSource":"MasterFisch","marketCheckedAt":"2026-08-12","marketUrl":"https://www.masterfisch.es/peces-marinos-damisela/676-yellow-tail-azure-damsel.html","image":null,"notes":"Identificación probable hasta nueva foto lateral."},
+    {"id":"cleanup-bee-snails","kind":"invertebrate","commonName":"Caracoles abeja","scientificName":"Pendiente de confirmar","count":3,"countMin":2,"countMax":3,"countIsEstimate":true,"status":"alive","confidence":0.45,"shop":null,"purchasePrice":null,"marketPrice":null,"image":null,"notes":"El propietario estima que quedan 2–3 ejemplares."}
   ],
-  "equipment": [
+  "equipment":[
     {"id":"filter-eheim","category":"filtration","name":"EHEIM Professionel 4+ 250","status":"working","confidence":1,"notes":"Filtro externo confirmado por pedido y fotografía."},
-    {"id":"flow-nero5","category":"flow","name":"AI Nero 5","status":"working","confidence":1,"notes":"Programación visible en app AI; captura muestra perfil Random y referencia de 30%."},
-    {"id":"skimmer-tunze","category":"skimmer","name":"Tunze Comline DOC Skimmer","model":"Probable 9004","status":"broken","confidence":0.72,"notes":"Modelo no confirmado aún por etiqueta. No sustituir antes de diagnosticar bomba, rotor, entrada de aire y obstrucciones."},
-    {"id":"light-fluval","category":"lighting","name":"Fluval Marine LED","status":"working","confidence":0.95,"notes":"Instalada dentro de la tapa. El ciclo exacto se conserva como dato derivado de captura hasta confirmar puntos/porcentajes manualmente."},
-    {"id":"topoff-reservoir","category":"topoff","name":"Sistema de reposición automática + depósito ~20 L","status":"broken","confidence":0.45,"notes":"Depósito lateral y tuberías visibles. Marca/modelo pendientes de identificar. El sistema dejó de funcionar."},
-    {"id":"salinity-hanna","category":"test","name":"Hanna Marine Salinity Tester","status":"working","confidence":1,"notes":"Medidor digital de salinidad confirmado visualmente."},
-    {"id":"phosphate-hanna","category":"test","name":"Hanna Checker Marine Phosphate ULR","status":"working","confidence":1,"notes":"Checker confirmado visualmente."},
-    {"id":"nitrate-hanna","category":"test","name":"Hanna Checker Marine Nitrate HR HI782","status":"working","confidence":1,"notes":"Checker confirmado visualmente."},
-    {"id":"magnesium-salifert","category":"test","name":"Salifert Magnesium Profi Test","status":"unknown","confidence":1,"notes":"Visible en armario; verificar caducidad y reactivos."},
-    {"id":"nitrite-salifert","category":"test","name":"Salifert Nitrite NO2 Profi Test","status":"unknown","confidence":1,"notes":"Visible en armario; verificar caducidad y reactivos."}
+    {"id":"flow-nero5","category":"flow","name":"AI Nero 5","status":"working","confidence":1,"purchasePrice":259,"purchaseSource":"Submersa","notes":"Pedido histórico confirma Bomba Nero 5 (11.300 L/h), AquaIllumination, 259,00 €; también Nero 5 Guard 3,40 €."},
+    {"id":"skimmer-tunze","category":"skimmer","name":"Tunze Comline DOC Skimmer","model":"Probable 9004","status":"broken","confidence":0.72,"notes":"Modelo pendiente de etiqueta; diagnosticar antes de sustituir."},
+    {"id":"light-fluval","category":"lighting","name":"Fluval Marine LED","status":"working","confidence":0.95,"notes":"Instalada dentro de la tapa."},
+    {"id":"topoff-reservoir","category":"topoff","name":"Sistema de reposición automática + depósito ~20 L","status":"broken","confidence":0.45,"notes":"Marca/modelo pendientes de identificar."},
+    {"id":"doser-aquamedic-evo5","category":"dosing","name":"Aqua Medic Reefdoser EVO 5","model":"EVO 5","status":"owned_unused","confidence":1,"purchasePrice":179.90,"purchaseSource":"Submersa","notes":"Modelo confirmado por pedido histórico del propietario. Comprado nuevo y nunca instalado/usado. Mantener dosificación automática desactivada hasta completar instalación, calibración de canales, línea base y consumo real.","accessories":[{"name":"Válvula antirretorno Submersa","count":4,"purchasePrice":7.60},{"name":"Tubos dosificadora 4 colores D-D (4 x 2 m)","count":1,"purchasePrice":12.95},{"name":"Soporte tubos dosificadora Bubble Magus","count":1,"purchasePrice":11.90}]},
+    {"id":"temp-controller-aquamedic","category":"temperature","name":"Aqua Medic T controller twin","status":"partially_broken","confidence":1,"notes":"Controlador visible en fotografía; propietario indica probable avería del enchufe/salida de corrección a frío."},
+    {"id":"vacuum-eheim","category":"maintenance","name":"EHEIM Quick Vac pro","status":"working","confidence":1,"notes":"Aspirador automático de fondo confirmado por fotografía/caja."},
+    {"id":"salinity-hanna","category":"test","name":"Hanna Marine Salinity Tester","status":"working","confidence":1,"notes":"Confirmado visualmente."},
+    {"id":"phosphate-hanna","category":"test","name":"Hanna Checker Marine Phosphate ULR","status":"working","confidence":1,"notes":"Confirmado visualmente."},
+    {"id":"nitrate-hanna","category":"test","name":"Hanna Checker Marine Nitrate HR HI782","status":"working","confidence":1,"notes":"Confirmado visualmente."},
+    {"id":"magnesium-salifert","category":"test","name":"Salifert Magnesium Profi Test","status":"unknown","confidence":1,"notes":"Visible; verificar caducidad/reactivos."},
+    {"id":"nitrite-salifert","category":"test","name":"Salifert Nitrite NO2 Profi Test","status":"unknown","confidence":1,"notes":"Visible; verificar caducidad/reactivos."}
   ],
-  "consumables": [
-    {"name":"Nyos Phosphate+","status":"owned","use":"dosificación de fosfato","warning":"No dosificar sin medición y objetivo definido."},
-    {"name":"Nyos Nitrate+","status":"owned","use":"dosificación de nitrato","warning":"No dosificar sin medición y objetivo definido."},
-    {"name":"Aquaforest AF LPS Food","status":"owned","use":"alimento para corales LPS","warning":"No prioritario mientras no haya coral activo."}
-  ],
-  "parameters": [
-    {"key":"temperature","name":"Temperatura","unit":"°C","target":"24–26","latest":null,"icon":"thermometer"},
-    {"key":"salinity","name":"Salinidad","unit":"ppt","target":"34–35.5","latest":null,"icon":"drop"},
-    {"key":"phosphate","name":"Fosfato PO₄","unit":"ppm","target":"0.03–0.10","latest":null,"icon":"flask"},
-    {"key":"nitrate","name":"Nitrato NO₃","unit":"ppm","target":"2–15","latest":null,"icon":"flask"},
-    {"key":"nitrite","name":"Nitrito NO₂","unit":"ppm","target":"0","latest":null,"icon":"flask"},
-    {"key":"alkalinity","name":"KH","unit":"dKH","target":"7.5–9","latest":null,"icon":"flask"},
-    {"key":"ph","name":"pH","unit":"","target":"7.9–8.4","latest":null,"icon":"flask"},
-    {"key":"magnesium","name":"Magnesio","unit":"ppm","target":"1250–1400","latest":null,"icon":"flask"}
-  ],
-  "automation": {
-    "nero5": {"mode":"Random","referencePercent":30,"source":"owner screenshot","exactScheduleConfirmed":false},
-    "lighting": {"fixture":"Fluval Marine","source":"owner screenshot","exactPointsConfirmed":false,"observed":"Programa diurno aproximado 10:00–22:00; canal morado aparece al 100%, blanco frío alrededor de 20% y rosa alrededor de 10% en la captura. Confirmar valores antes de usar para recomendaciones de coral."}
-  },
-  "risks": [
-    {"priority":1,"title":"Temperatura estival","severity":"high","reason":"El propietario reporta sobretemperatura en verano y la luminaria está dentro de la tapa."},
-    {"priority":2,"title":"Agua de reposición/cambios","severity":"high","reason":"Se ha usado agua de red y el sistema de reposición está averiado."},
-    {"priority":3,"title":"Skimmer averiado","severity":"medium","reason":"Reduce una vía de exportación de orgánicos; primero diagnosticar antes de comprar sustituto."},
-    {"priority":4,"title":"Mantenimiento muy escaso","severity":"medium","reason":"Sustrato no sifonado y filtro con mantenimiento poco frecuente; intervenir gradualmente, no limpiar todo de golpe."}
-  ]
+  "consumables":[{"name":"Nyos Phosphate+","status":"owned","use":"dosificación de fosfato","warning":"No dosificar sin medición y objetivo definido."},{"name":"Nyos Nitrate+","status":"owned","use":"dosificación de nitrato","warning":"No dosificar sin medición y objetivo definido."},{"name":"Aquaforest AF LPS Food","status":"owned","use":"alimento para corales LPS","warning":"No prioritario mientras no haya coral activo."},{"name":"Seachem MatrixCarbon 500 ml","status":"owned","purchasePrice":29.90,"purchaseSource":"Submersa"}],
+  "parameters":[{"key":"temperature","name":"Temperatura","unit":"°C","target":"24–26","latest":null,"icon":"thermometer"},{"key":"salinity","name":"Salinidad","unit":"ppt","target":"34–35.5","latest":null,"icon":"drop"},{"key":"phosphate","name":"Fosfato PO₄","unit":"ppm","target":"0.03–0.10","latest":null,"icon":"flask"},{"key":"nitrate","name":"Nitrato NO₃","unit":"ppm","target":"2–15","latest":null,"icon":"flask"},{"key":"nitrite","name":"Nitrito NO₂","unit":"ppm","target":"0","latest":null,"icon":"flask"},{"key":"alkalinity","name":"KH","unit":"dKH","target":"7.5–9","latest":null,"icon":"flask"},{"key":"ph","name":"pH","unit":"","target":"7.9–8.4","latest":null,"icon":"flask"},{"key":"magnesium","name":"Magnesio","unit":"ppm","target":"1250–1400","latest":null,"icon":"flask"}],
+  "automation":{"nero5":{"mode":"Random","referencePercent":30,"source":"owner screenshot","exactScheduleConfirmed":false},"lighting":{"fixture":"Fluval Marine","source":"owner screenshot","exactPointsConfirmed":false,"observed":"Programa diurno aproximado 10:00–22:00; confirmar valores antes de recomendaciones de coral."}},
+  "purchaseHistory":[{"shop":"Submersa","total":720.35,"shipping":0,"itemsConfirmedFromOwnerOrder":true,"items":[{"name":"EasyMasstick Easy Reefs 80 gr","qty":1,"price":25.90},{"name":"SBM Zoanthus Fake Chilli","qty":1,"price":19},{"name":"SBM Zoanthus Blue Steel","qty":1,"price":22},{"name":"SBM Zoanthus Lord Of The Ring","qty":1,"price":24},{"name":"SBM Zoanthus Space Chaos","qty":1,"price":29},{"name":"SBM Caulastrea Hulk","qty":1,"price":24},{"name":"SBM Duncanopsammia Axifuga","qty":1,"price":19},{"name":"Paguristes Cadenati","qty":2,"price":19.90},{"name":"Aqua Medic Reefdoser EVO 5","qty":1,"price":179.90},{"name":"Válvula Antiretorno Submersa","qty":4,"price":7.60},{"name":"Tubos Dosificadora 4 Colores D-D","qty":1,"price":12.95},{"name":"Soporte Tubos Dosificadora Bubble Magus","qty":1,"price":11.90},{"name":"AquaIllumination Nero 5","qty":1,"price":259},{"name":"Nero 5 Guard","qty":1,"price":3.40},{"name":"Seachem MatrixCarbon 500 ml","qty":1,"price":29.90}]}],
+  "risks":[{"priority":1,"title":"Temperatura estival","severity":"high","reason":"Sobretemperatura reportada y luminaria dentro de tapa."},{"priority":2,"title":"Agua de reposición/cambios","severity":"high","reason":"Se ha usado agua de red y reposición averiada."},{"priority":3,"title":"Skimmer averiado","severity":"medium","reason":"Diagnosticar antes de comprar sustituto."},{"priority":4,"title":"Mantenimiento muy escaso","severity":"medium","reason":"Intervenir gradualmente, no limpiar todo de golpe."}]
 }
