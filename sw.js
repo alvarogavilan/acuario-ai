@@ -1,4 +1,4 @@
-const CACHE='acuario-ai-v0.5.0';
+const CACHE='acuario-ai-v0.6.0';
 const ASSETS=['./','index.html','styles.css','experts.css','app.js','enhancements.js','individuals.js','experts.js','manifest.webmanifest','data/aquarium.json'];
 self.addEventListener('install',event=>{self.skipWaiting();event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)))});
 self.addEventListener('activate',event=>event.waitUntil(Promise.all([self.clients.claim(),caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))])));
