@@ -1,118 +1,62 @@
 (()=>{
 'use strict';
-const V='2.1';
+const V='2.2';
 const S=.08;
 let buildId=0;
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>[...r.querySelectorAll(s)];
-
-function loadThree(){
-  if(window.THREE)return Promise.resolve(window.THREE);
-  return new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';s.onload=()=>ok(window.THREE);s.onerror=no;document.head.appendChild(s)});
-}
-
-function patchCopy(){
-  const intro=$('.aquarium-intro'); if(!intro)return;
-  const k=$('.kicker',intro),h=$('h2',intro),p=$('p:not(.kicker)',intro);
-  if(k)k.textContent='MI ACUARIO · GEOMETRÍA REAL V2.1';
-  if(h)h.textContent='Aquascape reconstruido desde tus fotos';
-  if(p)p.textContent='La roca ya no se genera como montones aleatorios. La forma principal de cada isla, sus plataformas, huecos, alturas y voladizos se trazan desde las vistas frontal, laterales y superior con escala 82 × 40 × 39 cm.';
-}
-
-function boot(){
-  patchCopy(); const host=$('#myAquarium3d'); if(!host||host.dataset.v21==='1')return;
-  host.dataset.v21='1'; const id=++buildId;
-  loadThree().then(T=>{if(id===buildId&&document.body.contains(host))build(host,T)}).catch(()=>{host.innerHTML='<div class="aq20-error"><b>No se pudo cargar el motor 3D.</b><span>Comprueba conexión y vuelve a abrir Mi acuario.</span></div>'});
-}
-
+function loadThree(){if(window.THREE)return Promise.resolve(window.THREE);return new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';s.onload=()=>ok(window.THREE);s.onerror=no;document.head.appendChild(s)})}
+function patchCopy(){const intro=$('.aquarium-intro');if(!intro)return;const k=$('.kicker',intro),h=$('h2',intro),p=$('p:not(.kicker)',intro);if(k)k.textContent='MI ACUARIO · RECONSTRUCCIÓN V2.2';if(h)h.textContent='Tu aquascape real, reconstruido por estructura';if(p)p.textContent='Urna 82 × 40 × 39 cm. Dos islas fijas reconstruidas desde tus vistas frontal, superior y laterales: repisas, arcos, huecos, voladizos y profundidad. Se elimina la roca redonda genérica.'}
+function boot(){patchCopy();const host=$('#myAquarium3d');if(!host||host.dataset.v22==='1')return;host.dataset.v22='1';const id=++buildId;loadThree().then(T=>{if(id===buildId&&document.body.contains(host))build(host,T)}).catch(()=>{host.innerHTML='<div class="aq20-error"><b>No se pudo cargar el motor 3D.</b><span>Comprueba conexión y vuelve a abrir Mi acuario.</span></div>'})}
 function build(host,T){
-  host.innerHTML='';
-  const W=Math.max(320,host.clientWidth),H=Math.max(470,Math.round(W*.74));
-  const scene=new T.Scene(); scene.background=new T.Color(0x06111a); scene.fog=new T.FogExp2(0x061722,.016);
-  const camera=new T.PerspectiveCamera(33,W/H,.05,70); camera.position.set(0,.08,9.35);
-  const renderer=new T.WebGLRenderer({antialias:true,powerPreference:'high-performance'}); renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.7));renderer.setSize(W,H);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.04;renderer.shadowMap.enabled=true;host.appendChild(renderer.domElement);
-  const world=new T.Group();scene.add(world);
-  scene.add(new T.HemisphereLight(0xa4dfff,0x071015,1.20));
-  const top=new T.DirectionalLight(0xd7efff,3.0);top.position.set(-1,5,3);top.castShadow=true;scene.add(top);
-  const blue=new T.PointLight(0x315cff,13,14,1.8);blue.position.set(.1,3,1.3);scene.add(blue);
-
-  const tankW=82*S,tankD=40*S,tankH=39*S;
-  const glass=new T.MeshPhysicalMaterial({color:0xc4f3ff,transparent:true,opacity:.052,roughness:.02,transmission:.97,thickness:.03,side:T.DoubleSide});
-  const water=new T.Mesh(new T.BoxGeometry(tankW-.14,tankH-.20,tankD-.14),new T.MeshPhysicalMaterial({color:0x0b607e,transparent:true,opacity:.055,roughness:.04,transmission:.86,thickness:.10}));water.position.y=.01;world.add(water);
-  [-tankW/2,tankW/2].forEach(x=>{const m=new T.Mesh(new T.BoxGeometry(.028,tankH,tankD),glass);m.position.x=x;world.add(m)});
-  const rear=new T.Mesh(new T.BoxGeometry(tankW,tankH,.028),glass);rear.position.z=-tankD/2;world.add(rear);
-  const rimMat=new T.MeshStandardMaterial({color:0xe7e9e8,roughness:.32});
-  [[tankH/2+.035,.10],[-tankH/2-.045,.12]].forEach(([y,h])=>{const m=new T.Mesh(new T.BoxGeometry(tankW+.12,h,tankD+.10),rimMat);m.position.y=y;world.add(m)});
-
-  const sg=new T.PlaneGeometry(tankW-.18,tankD-.18,54,30),sp=sg.attributes.position;
-  for(let i=0;i<sp.count;i++){const x=sp.getX(i),z=sp.getY(i);sp.setZ(i,.018*Math.sin(x*2.4)+.014*Math.cos(z*4.3)+.008*Math.sin((x-z)*7.2)+.026*Math.abs(x)/(tankW/2))}sg.computeVertexNormals();
-  const sand=new T.Mesh(sg,new T.MeshStandardMaterial({color:0xd8cfb7,roughness:1}));sand.rotation.x=-Math.PI/2;sand.position.y=-1.42;sand.receiveShadow=true;world.add(sand);
-
-  const technical=new T.Mesh(new T.BoxGeometry(.61,2.58,.17),new T.MeshStandardMaterial({color:0x11171c,roughness:.88}));technical.position.set(.04,-.04,-1.45);world.add(technical);
-
-  const rockMats=[0x745a4d,0x685146,0x7b6154,0x5d4b43].map(c=>new T.MeshStandardMaterial({color:c,roughness:.99}));
-  function poly(points,depth,z,mat=0,bevel=.06){
-    const s=new T.Shape();points.forEach((p,i)=>i?s.lineTo(p[0],p[1]):s.moveTo(p[0],p[1]));s.closePath();
-    const g=new T.ExtrudeGeometry(s,{depth,bevelEnabled:true,bevelThickness:bevel,bevelSize:bevel,bevelSegments:2,curveSegments:2});g.translate(0,0,-depth/2);g.computeVertexNormals();
-    const m=new T.Mesh(g,rockMats[mat%rockMats.length]);m.position.z=z;m.castShadow=m.receiveShadow=true;world.add(m);return m;
-  }
-  function blob(x,y,z,sx,sy,sz,seed,mat=0){
-    const g=new T.DodecahedronGeometry(1,2),p=g.attributes.position;for(let i=0;i<p.count;i++){const a=p.getX(i),b=p.getY(i),c=p.getZ(i);const n=1+.09*Math.sin(a*9+seed)+.06*Math.cos(b*13-seed)+.045*Math.sin(c*17+seed*.7);p.setXYZ(i,a*n,b*n,c*n)}g.computeVertexNormals();
-    const m=new T.Mesh(g,rockMats[mat%4]);m.position.set(x,y,z);m.scale.set(sx,sy,sz);m.rotation.set(seed*.07,seed*.11,seed*.04);m.castShadow=m.receiveShadow=true;world.add(m);return m;
-  }
-  function hole(x,y,z,sx,sy,rot=0){const m=new T.Mesh(new T.SphereGeometry(1,24,16),new T.MeshBasicMaterial({color:0x020507,transparent:true,opacity:.98}));m.position.set(x,y,z);m.scale.set(sx,sy,.06);m.rotation.z=rot;world.add(m)}
-  function pores(cx,cy,cz,rx,ry,n,seed){for(let i=0;i<n;i++){const a=(i*2.399+seed)%6.283,q=.25+.72*((i*37+seed*9)%100)/100;blob(cx+Math.cos(a)*rx*q,cy+Math.sin(a)*ry*q,cz+.03*Math.sin(i),.10+.08*((i*11)%7)/7,.07+.06*((i*13)%5)/5,.09+.06*((i*17)%6)/6,seed+i,i)}}
-
-  // IZQUIERDA: silueta frontal trazada sobre tus fotos. Base ancha, gran hueco central bajo, plataforma horizontal intermedia y corona redondeada baja.
-  poly([[-3.00,-1.34],[-2.95,-1.02],[-2.70,-.92],[-2.62,-.58],[-2.42,-.46],[-2.42,-.28],[-2.78,-.18],[-2.96,-.04],[-2.95,.15],[-2.72,.27],[-2.47,.33],[-2.30,.42],[-2.04,.48],[-1.82,.55],[-1.58,.59],[-1.34,.56],[-1.10,.50],[-.92,.43],[-.69,.37],[-.49,.22],[-.40,.03],[-.24,-.02],[-.27,-.22],[-.45,-.31],[-.42,-.55],[-.28,-.69],[-.25,-.91],[-.39,-1.05],[-.65,-1.11],[-.82,-1.34]],1.16,-.30,0,.075);
-  // corte visual del arco inferior real
-  hole(-1.48,-1.05,.55,.53,.39,-.03);hole(-1.12,-.83,.56,.23,.19,-.08);
-  // gran repisa frontal que define el perfil real
-  poly([[-3.05,-.30],[-2.93,-.18],[-2.30,-.12],[-1.84,-.10],[-1.34,-.13],[-.86,-.16],[-.44,-.19],[-.32,-.30],[-.45,-.43],[-.98,-.45],[-1.48,-.42],[-2.02,-.41],[-2.60,-.43],[-2.93,-.40]],.64,.54,1,.045);
-  // corona de piedras grandes, no nube aleatoria
-  [[-2.49,.46,.02,.43,.28,.42,10],[-2.03,.58,-.04,.48,.30,.45,11],[-1.54,.65,-.08,.49,.31,.45,12],[-1.06,.59,-.04,.43,.29,.41,13],[-.66,.46,.00,.37,.25,.36,14],[-2.69,.25,.10,.33,.22,.31,15],[-1.79,.30,.15,.31,.22,.31,16],[-1.28,.31,.16,.31,.22,.30,17]].forEach(v=>blob(...v,2));
-  pores(-1.62,.38,.18,1.12,.34,16,60);
-
-  // DERECHA: base abierta, plataforma frontal baja a la izquierda y torre posterior alta en el tercio derecho.
-  poly([[.40,-1.34],[.44,-1.10],[.63,-.94],[.72,-.70],[.60,-.56],[.44,-.46],[.41,-.26],[.60,-.13],[.91,-.13],[1.12,-.26],[1.35,-.28],[1.52,-.16],[1.65,.02],[1.66,.28],[1.78,.47],[1.94,.66],[2.03,.92],[2.20,1.14],[2.43,1.22],[2.62,1.08],[2.70,.85],[2.91,.75],[3.02,.54],[2.98,.30],[2.78,.10],[2.84,-.12],[3.02,-.29],[2.99,-.56],[2.78,-.75],[2.69,-1.03],[2.91,-1.20],[2.83,-1.34]],1.08,-.40,2,.075);
-  hole(2.17,-1.03,.55,.45,.34,.06);
-  // plataforma frontal real, baja y proyectada hacia el cristal
-  poly([[.48,-.67],[.66,-.56],[1.08,-.50],[1.50,-.52],[1.83,-.58],[1.90,-.70],[1.72,-.82],[1.24,-.84],[.81,-.82],[.52,-.77]],.72,.55,1,.045);
-  // saliente medio izquierdo visible en frontal
-  poly([[.48,-.13],[.58,.00],[.86,.08],[1.10,.07],[1.28,-.02],[1.25,-.17],[1.04,-.24],[.71,-.23]],.62,.35,0,.04);
-  [[1.56,.15,-.05,.40,.29,.38,30],[1.88,.43,-.10,.44,.34,.42,31],[2.18,.72,-.17,.42,.37,.39,32],[2.49,.92,-.23,.34,.31,.33,33],[2.68,.60,-.12,.31,.28,.31,34],[2.41,.32,.03,.40,.31,.38,35],[2.03,.12,.10,.39,.30,.37,36],[2.71,.08,.08,.31,.24,.30,37],[1.35,-.20,.16,.29,.22,.29,38]].forEach(v=>blob(...v,3));
-  pores(2.12,.43,.12,.72,.46,13,90);
-
-  const corMat=new T.MeshStandardMaterial({color:0x805d75,roughness:.98,transparent:true,opacity:.30});
-  [[-1.86,.70,.06,.23],[2.23,1.03,-.08,.18],[1.84,.55,.16,.16],[-2.55,.20,.42,.15]].forEach(v=>{const m=new T.Mesh(new T.SphereGeometry(1,16,10),corMat);m.position.set(v[0],v[1],v[2]);m.scale.set(v[3],.025,v[3]*.72);world.add(m)});
-
-  function pump(x,y,z,flip=false){const g=new T.Group(),d=new T.MeshStandardMaterial({color:0x10171a,roughness:.4,metalness:.2}),a=new T.MeshStandardMaterial({color:0x2d9bc9,roughness:.3});const s=new T.Mesh(new T.CylinderGeometry(.19,.19,.21,28),d);s.rotation.z=Math.PI/2;g.add(s);const h=new T.Mesh(new T.CylinderGeometry(.055,.055,.23,18),a);h.rotation.z=Math.PI/2;g.add(h);g.position.set(x,y,z);if(flip)g.rotation.y=Math.PI;world.add(g)}
-  pump(-3.02,.62,-.57);pump(-3.02,.62,.04);pump(3.02,.64,-.46,true);
-
-  function simpleFish(x,y,z,cm,color,phase,kind='generic'){
-    const L=cm*S,g=new T.Group();g.userData={home:new T.Vector3(x,y,z),phase,speed:.18+.03*phase};
-    const body=new T.Mesh(new T.SphereGeometry(1,32,20),new T.MeshStandardMaterial({color,roughness:.42}));body.scale.set(L*.48,L*(kind==='clown'?.23:.27),L*.13);g.add(body);
-    const tail=new T.Mesh(new T.ConeGeometry(L*.16,L*.27,3),new T.MeshStandardMaterial({color,roughness:.45,side:T.DoubleSide}));tail.rotation.z=-Math.PI/2;tail.position.x=-L*.56;g.add(tail);
-    if(kind==='clown'){
-      const w=new T.MeshStandardMaterial({color:0xf0eee7,roughness:.48}),b=new T.MeshStandardMaterial({color:0x161719,roughness:.48});
-      [.17,-.13].forEach(px=>{const o=new T.Mesh(new T.TorusGeometry(L*.112,L*.025,9,28),b);o.rotation.y=Math.PI/2;o.position.x=L*px;g.add(o);const q=new T.Mesh(new T.TorusGeometry(L*.112,L*.014,9,28),w);q.rotation.y=Math.PI/2;q.position.x=L*px;g.add(q)});
-    }
-    g.position.set(x,y,z);world.add(g);return g;
-  }
-  const fish=[simpleFish(-2.48,.32,.57,6.2,0xe76b1c,.2,'clown'),simpleFish(-2.13,.08,.28,5.2,0xe76b1c,1.1,'clown'),simpleFish(2.20,-.50,.10,8.5,0x2456d8,1.9),simpleFish(1.12,.46,-.05,6.5,0x2e4bb8,2.7)];
-
-  const views={front:[0,.08,9.35],left:[-8.0,.12,1.8],right:[8.0,.12,1.8],top:[0,8.4,.22],free:[4.7,3.0,6.3]};
-  $$('[data-aqview]').forEach(btn=>btn.addEventListener('click',()=>{$$('[data-aqview]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const v=views[btn.dataset.aqview]||views.front;camera.position.set(...v);camera.lookAt(0,-.08,0)}));camera.lookAt(0,-.08,0);
-  let drag=false,px=0,py=0,yaw=0,pitch=0;renderer.domElement.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;renderer.domElement.setPointerCapture?.(e.pointerId)});renderer.domElement.addEventListener('pointermove',e=>{if(!drag)return;yaw+=(e.clientX-px)*.004;pitch=Math.max(-.30,Math.min(.30,pitch+(e.clientY-py)*.003));px=e.clientX;py=e.clientY;world.rotation.y=yaw;world.rotation.x=pitch});renderer.domElement.addEventListener('pointerup',()=>drag=false);
-
-  const badge=document.createElement('div');badge.className='aq19-calibration';badge.innerHTML='<b>V2.1 · SILUETA TRAZADA</b><span>82 × 40 × 39 cm</span>';host.appendChild(badge);
-  const note=document.createElement('div');note.className='aq19-scale';note.innerHTML='<span></span><b>10 cm reales</b><small>rocas = forma fija · peces ≈ escala real</small>';host.appendChild(note);
-
-  const clock=new T.Clock();let raf=0;function animate(){raf=requestAnimationFrame(animate);const t=clock.getElapsedTime();fish.forEach((f,i)=>{f.position.x=f.userData.home.x+Math.sin(t*f.userData.speed+f.userData.phase)*.14;f.position.y=f.userData.home.y+Math.sin(t*.55+f.userData.phase)*.045;f.rotation.y=Math.sin(t*.22+i)*.12});renderer.render(scene,camera)}animate();
-  const ro=new ResizeObserver(()=>{if(!document.body.contains(host)){cancelAnimationFrame(raf);ro.disconnect();return}const nw=Math.max(320,host.clientWidth),nh=Math.max(470,Math.round(nw*.74));camera.aspect=nw/nh;camera.updateProjectionMatrix();renderer.setSize(nw,nh,false)});ro.observe(host);
+ host.innerHTML='';host.classList.add('aq22-stage');
+ const W=Math.max(320,host.clientWidth),H=Math.max(500,Math.round(W*.74));
+ const scene=new T.Scene();scene.background=new T.Color(0x06111a);scene.fog=new T.FogExp2(0x071923,.012);
+ const camera=new T.PerspectiveCamera(31,W/H,.05,80);camera.position.set(0,.02,9.45);
+ const renderer=new T.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.6));renderer.setSize(W,H);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.02;renderer.shadowMap.enabled=true;host.appendChild(renderer.domElement);
+ const world=new T.Group();scene.add(world);
+ scene.add(new T.HemisphereLight(0x8dcfff,0x140f0e,1.08));const key=new T.DirectionalLight(0xd7ecff,2.35);key.position.set(-2.5,5.1,3.5);key.castShadow=true;scene.add(key);const blue=new T.PointLight(0x284dff,8.5,13,1.65);blue.position.set(.3,2.4,1.8);scene.add(blue);const warm=new T.PointLight(0xffb46a,1.3,7,2);warm.position.set(-3,-.3,2.2);scene.add(warm);
+ const tankW=82*S,tankD=40*S,tankH=39*S;
+ const glass=new T.MeshPhysicalMaterial({color:0xc8efff,transparent:true,opacity:.042,roughness:.02,transmission:.97,thickness:.02,side:T.DoubleSide});
+ const rear=new T.Mesh(new T.BoxGeometry(tankW,tankH,.024),glass);rear.position.z=-tankD/2;world.add(rear);[-tankW/2,tankW/2].forEach(x=>{const m=new T.Mesh(new T.BoxGeometry(.025,tankH,tankD),glass);m.position.x=x;world.add(m)});
+ const water=new T.Mesh(new T.BoxGeometry(tankW-.10,tankH-.16,tankD-.10),new T.MeshPhysicalMaterial({color:0x0a5d82,transparent:true,opacity:.035,roughness:.03,transmission:.91,thickness:.08}));world.add(water);
+ const rimMat=new T.MeshStandardMaterial({color:0xe6e7e5,roughness:.34});[[tankH/2+.035,.09],[-tankH/2-.04,.11]].forEach(([y,h])=>{const m=new T.Mesh(new T.BoxGeometry(tankW+.12,h,tankD+.08),rimMat);m.position.y=y;world.add(m)});
+ const sg=new T.PlaneGeometry(tankW-.18,tankD-.18,54,28),sp=sg.attributes.position;for(let i=0;i<sp.count;i++){const x=sp.getX(i),z=sp.getY(i);sp.setZ(i,.014*Math.sin(x*2.8)+.009*Math.cos(z*5.1)+.018*Math.pow(Math.abs(x)/(tankW/2),2))}sg.computeVertexNormals();const sand=new T.Mesh(sg,new T.MeshStandardMaterial({color:0xd7ccb1,roughness:1}));sand.rotation.x=-Math.PI/2;sand.position.y=-1.42;world.add(sand);
+ const tech=new T.Mesh(new T.BoxGeometry(.58,2.52,.13),new T.MeshStandardMaterial({color:0x0f1418,roughness:.9}));tech.position.set(.02,-.03,-1.48);world.add(tech);
+ const rockMats=[0x6e4d40,0x795749,0x60443c,0x856254,0x57423c].map(c=>new T.MeshStandardMaterial({color:c,roughness:.98,metalness:0,flatShading:false}));
+ const purple=new T.MeshStandardMaterial({color:0x6f5068,roughness:.98,transparent:true,opacity:.34});const olive=new T.MeshStandardMaterial({color:0x665b3d,roughness:.99,transparent:true,opacity:.22});
+ function roughen(g,seed,amount=.045){const p=g.attributes.position;for(let i=0;i<p.count;i++){let x=p.getX(i),y=p.getY(i),z=p.getZ(i);const n=Math.sin((x+seed)*8.3)+Math.cos((y-seed)*11.7)+Math.sin((z+seed*.7)*13.1);const f=1+amount*n/3;p.setXYZ(i,x*f,y*f,z*f)}g.computeVertexNormals();return g}
+ function slab(points,depth,z,mat=0,seed=1,bevel=.045){const s=new T.Shape();points.forEach((p,i)=>i?s.lineTo(p[0],p[1]):s.moveTo(p[0],p[1]));s.closePath();const g=new T.ExtrudeGeometry(s,{depth,bevelEnabled:true,bevelThickness:bevel,bevelSize:bevel,bevelSegments:1,curveSegments:1});g.translate(0,0,-depth/2);roughen(g,seed,.028);const m=new T.Mesh(g,rockMats[mat%rockMats.length]);m.position.z=z;m.castShadow=m.receiveShadow=true;world.add(m);return m}
+ function chip(cx,cy,cz,w,h,d,seed,mat=0,rot=0){const pts=[];const n=8;for(let i=0;i<n;i++){const a=i/n*Math.PI*2;const r=1+0.22*Math.sin(seed*1.7+i*2.3)+0.11*Math.cos(seed*.9-i*1.1);pts.push([cx+Math.cos(a)*w*.5*r,cy+Math.sin(a)*h*.5*r])}const m=slab(pts,d,cz,mat,seed,.028);m.rotation.z=rot;return m}
+ function ledge(points,z,depth,seed,mat=1){return slab(points,depth,z,mat,seed,.035)}
+ function cavity(x,y,z,w,h,rot=0){const sh=new T.Shape();sh.absellipse(0,0,w,h,0,Math.PI*2,false,0);const g=new T.ShapeGeometry(sh,28);const m=new T.Mesh(g,new T.MeshBasicMaterial({color:0x020508,transparent:true,opacity:.92,side:T.DoubleSide}));m.position.set(x,y,z);m.rotation.z=rot;world.add(m)}
+ function crust(points,z,seed,material=purple){const s=new T.Shape();points.forEach((p,i)=>i?s.lineTo(p[0],p[1]):s.moveTo(p[0],p[1]));s.closePath();const g=new T.ShapeGeometry(s);const m=new T.Mesh(g,material);m.position.z=z;m.position.y+=.004*Math.sin(seed);world.add(m)}
+ // Isla izquierda: base con arco inferior real, plataforma media larga y corona baja/ancha.
+ slab([[-3.02,-1.34],[-2.98,-1.08],[-2.81,-.94],[-2.66,-.91],[-2.52,-.72],[-2.43,-.50],[-2.57,-.37],[-2.86,-.31],[-2.96,-.14],[-2.91,.03],[-2.65,.16],[-2.32,.22],[-2.03,.29],[-1.74,.34],[-1.40,.37],[-1.06,.35],[-.77,.29],[-.52,.16],[-.36,.01],[-.31,-.18],[-.41,-.35],[-.36,-.59],[-.27,-.78],[-.31,-.98],[-.50,-1.11],[-.78,-1.20],[-.86,-1.34]],1.18,-.34,0,10,.052);
+ cavity(-1.46,-1.08,.64,.56,.38,-.03);cavity(-1.05,-.85,.65,.22,.18,-.05);
+ ledge([[-3.05,-.36],[-2.84,-.25],[-2.43,-.20],[-2.02,-.18],[-1.61,-.20],[-1.20,-.21],[-.80,-.23],[-.44,-.28],[-.32,-.39],[-.50,-.48],[-1.02,-.50],[-1.55,-.48],[-2.03,-.47],[-2.58,-.49],[-2.94,-.46]],.58,.66,20,1);
+ // Corona izquierda: piezas angulares con geometría aplanada, no bolas.
+ [[-2.62,.27,.00,.62,.35,.56,31,2,-.05],[-2.28,.50,-.02,.72,.39,.60,32,3,.03],[-1.85,.59,-.07,.78,.39,.62,33,1,-.02],[-1.40,.62,-.09,.76,.38,.60,34,3,.01],[-.98,.56,-.05,.66,.35,.54,35,1,.04],[-.64,.39,.03,.52,.31,.46,36,2,-.02],[-2.69,.08,.18,.48,.25,.38,37,0,.05],[-2.05,.20,.18,.47,.25,.40,38,4,-.04],[-1.45,.22,.20,.45,.24,.38,39,0,.02],[-.94,.21,.18,.44,.24,.36,40,4,-.03]].forEach(v=>chip(...v));
+ // Hendiduras/poros reales como cavidades oscuras y cortes, no bultos.
+ [[-2.37,.47,.61,.09,.055],[-1.98,.56,.62,.08,.05],[-1.62,.55,.63,.10,.06],[-1.25,.50,.62,.075,.05],[-.90,.41,.59,.07,.045],[-2.18,.08,.60,.08,.05],[-1.55,.16,.63,.07,.05],[-.78,.12,.56,.07,.05]].forEach(v=>cavity(...v));
+ // Isla derecha: plataforma baja frontal y torre posterior alta, con base abierta.
+ slab([[.42,-1.34],[.45,-1.09],[.66,-.95],[.76,-.73],[.62,-.59],[.47,-.51],[.43,-.30],[.59,-.15],[.88,-.12],[1.10,-.24],[1.34,-.27],[1.51,-.16],[1.62,.03],[1.67,.29],[1.79,.48],[1.94,.70],[2.05,.96],[2.18,1.16],[2.40,1.25],[2.58,1.12],[2.66,.92],[2.88,.77],[3.01,.56],[3.00,.30],[2.80,.10],[2.84,-.13],[3.02,-.31],[3.00,-.58],[2.78,-.77],[2.69,-1.02],[2.89,-1.19],[2.80,-1.34]],1.12,-.38,2,50,.052);
+ cavity(2.16,-1.05,.63,.47,.33,.04);
+ ledge([[.47,-.68],[.68,-.56],[1.04,-.51],[1.45,-.53],[1.78,-.59],[1.91,-.70],[1.73,-.82],[1.30,-.85],[.86,-.82],[.54,-.77]],.59,.74,51,1);
+ ledge([[.45,-.15],[.58,-.01],[.86,.08],[1.08,.07],[1.29,-.02],[1.27,-.17],[1.03,-.25],[.70,-.24]],.38,.63,52,0);
+ [[1.42,-.16,.15,.54,.29,.43,60,4,.03],[1.70,.11,.08,.60,.35,.48,61,1,-.02],[1.91,.39,-.04,.67,.41,.52,62,3,.04],[2.14,.70,-.13,.65,.47,.54,63,1,-.01],[2.40,.98,-.20,.58,.43,.50,64,3,.03],[2.65,.77,-.10,.53,.38,.45,65,2,-.04],[2.70,.42,.02,.55,.36,.45,66,4,.01],[2.50,.20,.11,.56,.33,.44,67,0,.03],[2.12,.16,.14,.53,.31,.42,68,3,-.02],[2.86,.04,.10,.45,.29,.38,69,2,.02]].forEach(v=>chip(...v));
+ [[1.74,.18,.61,.08,.05],[1.94,.43,.62,.09,.055],[2.22,.70,.60,.08,.05],[2.44,.94,.58,.075,.05],[2.62,.60,.60,.08,.05],[2.39,.30,.62,.07,.045],[2.72,.27,.58,.07,.045]].forEach(v=>cavity(...v));
+ // Parches de coralina/alga sobre superficies, tomando los tonos observados en tus fotos actuales.
+ crust([[-2.68,.18],[-2.30,.22],[-2.05,.27],[-2.19,.34],[-2.60,.31]],.666,1,purple);crust([[-1.70,.34],[-1.35,.36],[-1.06,.33],[-1.18,.27],[-1.53,.28]],.665,2,purple);crust([[1.70,.02],[2.05,.16],[2.25,.43],[2.03,.49],[1.76,.27]],.675,3,purple);crust([[2.25,.73],[2.52,.98],[2.68,.78],[2.53,.59]],.675,4,olive);
+ function pump(x,y,z,flip=false){const g=new T.Group(),d=new T.MeshStandardMaterial({color:0x11171b,roughness:.43}),a=new T.MeshStandardMaterial({color:0x298fc0,roughness:.32});const shell=new T.Mesh(new T.CylinderGeometry(.18,.18,.20,24),d);shell.rotation.z=Math.PI/2;g.add(shell);const hub=new T.Mesh(new T.CylinderGeometry(.052,.052,.22,18),a);hub.rotation.z=Math.PI/2;g.add(hub);g.position.set(x,y,z);if(flip)g.rotation.y=Math.PI;world.add(g)}pump(-3.04,.62,-.58);pump(-3.04,.62,.02);pump(3.03,.64,-.45,true);
+ // Peces actuales: escala física reducida. Se usan siluetas anatómicas planas en vez de cuerpos esféricos gigantes.
+ function fishShape(cm,bodyColor,tailColor,kind='generic'){const L=cm*S;const g=new T.Group();const shape=new T.Shape();shape.moveTo(-.45*L,0);shape.bezierCurveTo(-.32*L,.22*L,.17*L,.24*L,.42*L,.05*L);shape.bezierCurveTo(.48*L,.01*L,.48*L,-.01*L,.42*L,-.05*L);shape.bezierCurveTo(.17*L,-.24*L,-.32*L,-.22*L,-.45*L,0);const body=new T.Mesh(new T.ShapeGeometry(shape,20),new T.MeshStandardMaterial({color:bodyColor,roughness:.42,side:T.DoubleSide}));g.add(body);const tail=new T.Shape();tail.moveTo(-.43*L,0);tail.lineTo(-.67*L,.18*L);tail.lineTo(-.62*L,-.18*L);tail.closePath();const tm=new T.Mesh(new T.ShapeGeometry(tail),new T.MeshStandardMaterial({color:tailColor,roughness:.43,side:T.DoubleSide}));g.add(tm);if(kind==='clown'){const white=new T.MeshBasicMaterial({color:0xf4f1e8,side:T.DoubleSide});[-.16,.13].forEach(px=>{const q=new T.Mesh(new T.PlaneGeometry(.055*L,.34*L),white);q.position.set(px*L,0,.004);g.add(q)})}g.scale.y=.86;return g}
+ const fish=[];function addFish(x,y,z,cm,body,tail,phase,kind){const f=fishShape(cm,body,tail,kind);f.position.set(x,y,z);f.userData={home:new T.Vector3(x,y,z),phase,speed:.15+.02*phase};world.add(f);fish.push(f)}addFish(-2.48,.22,.60,5.3,0xe76a1d,0xe76a1d,.2,'clown');addFish(-2.10,.02,.34,4.6,0xe76a1d,0xe76a1d,1.1,'clown');addFish(2.12,-.48,.11,7.4,0x244fc7,0xf0d23e,1.9,'generic');addFish(1.02,.42,-.03,4.6,0x204fc6,0xf1d637,2.7,'generic');
+ const views={front:[0,.02,9.45],left:[-8.0,.08,1.8],right:[8.0,.08,1.8],top:[0,8.35,.15],free:[4.8,2.9,6.4]};$$('[data-aqview]').forEach(btn=>btn.addEventListener('click',()=>{$$('[data-aqview]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const v=views[btn.dataset.aqview]||views.front;camera.position.set(...v);camera.lookAt(0,-.08,0)}));camera.lookAt(0,-.08,0);
+ let drag=false,px=0,py=0,yaw=0,pitch=0;renderer.domElement.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;renderer.domElement.setPointerCapture?.(e.pointerId)});renderer.domElement.addEventListener('pointermove',e=>{if(!drag)return;yaw+=(e.clientX-px)*.0035;pitch=Math.max(-.26,Math.min(.26,pitch+(e.clientY-py)*.0028));px=e.clientX;py=e.clientY;world.rotation.y=yaw;world.rotation.x=pitch});renderer.domElement.addEventListener('pointerup',()=>drag=false);
+ const badge=document.createElement('div');badge.className='aq22-badge';badge.textContent='V2.2 · ESCALA 82 × 40 × 39 CM';host.appendChild(badge);const note=document.createElement('div');note.className='aq22-note';note.textContent='Roca: estructuras angulares y repisas trazadas desde tus fotos. Peces: escala física aproximada actual; sin gigantismo visual.';host.appendChild(note);
+ const clock=new T.Clock();let raf=0;function animate(){raf=requestAnimationFrame(animate);const t=clock.getElapsedTime();fish.forEach((f,i)=>{f.position.x=f.userData.home.x+Math.sin(t*f.userData.speed+f.userData.phase)*.11;f.position.y=f.userData.home.y+Math.sin(t*.48+f.userData.phase)*.035;f.rotation.y=Math.sin(t*.18+i)*.10});renderer.render(scene,camera)}animate();
+ const ro=new ResizeObserver(()=>{if(!document.body.contains(host)){cancelAnimationFrame(raf);ro.disconnect();return}const nw=Math.max(320,host.clientWidth),nh=Math.max(500,Math.round(nw*.74));camera.aspect=nw/nh;camera.updateProjectionMatrix();renderer.setSize(nw,nh,false)});ro.observe(host);
 }
-
-document.addEventListener('click',e=>{if(e.target.closest('[data-view="twin"]'))setTimeout(boot,70)});
-const mo=new MutationObserver(()=>{if($('#myAquarium3d'))boot()});mo.observe(document.body,{childList:true,subtree:true});
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+document.addEventListener('click',e=>{if(e.target.closest('[data-view="twin"]'))setTimeout(boot,70)});const mo=new MutationObserver(()=>{if($('#myAquarium3d'))boot()});mo.observe(document.body,{childList:true,subtree:true});if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
