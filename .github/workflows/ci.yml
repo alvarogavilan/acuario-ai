@@ -15,10 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Validate JavaScript
-        run: node --check app.js
+        run: |
+          node --check app.js
+          node --check enhancements.js
+          node --check individuals.js
       - name: Validate JSON
         run: |
           python -m json.tool data/aquarium.json >/dev/null
+          python -m json.tool data/market.json >/dev/null
           python -m json.tool manifest.webmanifest >/dev/null
       - name: Verify required files
-        run: test -f index.html && test -f styles.css && test -f sw.js
+        run: test -f index.html && test -f styles.css && test -f sw.js && test -f enhancements.js && test -f individuals.js
