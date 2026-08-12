@@ -1,0 +1,115 @@
+{
+  "aquarium": {
+    "name": "Reef 130 L",
+    "volumeLiters": 130,
+    "type": "marine",
+    "location": "Sevilla 41020",
+    "status": "baseline",
+    "startedApprox": "2023",
+    "goals": ["estabilizar temperatura", "eliminar dependencia de agua de red", "recuperar skimmer", "volver a mantener coral"]
+  },
+  "livestock": [
+    {
+      "id": "fish-clown-1",
+      "kind": "fish",
+      "commonName": "Pez payaso",
+      "scientificName": "Amphiprion sp.",
+      "count": 1,
+      "status": "alive",
+      "confidence": 0.96,
+      "shop": "Masterfish",
+      "purchasePrice": null,
+      "marketPrice": null,
+      "marketSource": null,
+      "image": null,
+      "emoji": "🐠",
+      "notes": "Ejemplar visible en fotografías. Especie exacta pendiente de confirmar."
+    },
+    {
+      "id": "fish-blue-tang-1",
+      "kind": "fish",
+      "commonName": "Cirujano azul",
+      "scientificName": "Paracanthurus hepatus",
+      "count": 1,
+      "status": "alive",
+      "confidence": 0.99,
+      "shop": "Cetamar",
+      "purchasePrice": null,
+      "marketPrice": null,
+      "marketSource": null,
+      "image": null,
+      "emoji": "🐟",
+      "notes": "Identificación visual de alta confianza. Requiere seguimiento específico por volumen del acuario."
+    },
+    {
+      "id": "fish-blue-yellow-1",
+      "kind": "fish",
+      "commonName": "Pez azul de cola amarilla",
+      "scientificName": "Pendiente de identificación",
+      "count": 1,
+      "status": "alive",
+      "confidence": 0.55,
+      "shop": "Masterfish",
+      "purchasePrice": null,
+      "marketPrice": null,
+      "marketSource": null,
+      "image": null,
+      "emoji": "🐟",
+      "notes": "No fijar especie hasta obtener una fotografía lateral más diagnóstica."
+    },
+    {
+      "id": "cleanup-bee-snails",
+      "kind": "invertebrate",
+      "commonName": "Caracoles abeja",
+      "scientificName": "Pendiente de confirmar",
+      "count": 3,
+      "countIsEstimate": true,
+      "status": "alive",
+      "confidence": 0.45,
+      "shop": null,
+      "purchasePrice": null,
+      "marketPrice": null,
+      "marketSource": null,
+      "image": null,
+      "emoji": "🐌",
+      "notes": "El propietario estima que quedan 2–3 ejemplares; varios del equipo de limpieza han muerto."
+    }
+  ],
+  "equipment": [
+    {"id":"filter-eheim","category":"filtration","name":"EHEIM Professionel 4+ 250","status":"working","confidence":1,"notes":"Filtro externo confirmado por pedido y fotografía."},
+    {"id":"flow-nero5","category":"flow","name":"AI Nero 5","status":"working","confidence":1,"notes":"Programación visible en app AI; captura muestra perfil Random y referencia de 30%."},
+    {"id":"skimmer-tunze","category":"skimmer","name":"Tunze Comline DOC Skimmer","model":"Probable 9004","status":"broken","confidence":0.72,"notes":"Modelo no confirmado aún por etiqueta. No sustituir antes de diagnosticar bomba, rotor, entrada de aire y obstrucciones."},
+    {"id":"light-fluval","category":"lighting","name":"Fluval Marine LED","status":"working","confidence":0.95,"notes":"Instalada dentro de la tapa. El ciclo exacto se conserva como dato derivado de captura hasta confirmar puntos/porcentajes manualmente."},
+    {"id":"topoff-reservoir","category":"topoff","name":"Sistema de reposición automática + depósito ~20 L","status":"broken","confidence":0.45,"notes":"Depósito lateral y tuberías visibles. Marca/modelo pendientes de identificar. El sistema dejó de funcionar."},
+    {"id":"salinity-hanna","category":"test","name":"Hanna Marine Salinity Tester","status":"working","confidence":1,"notes":"Medidor digital de salinidad confirmado visualmente."},
+    {"id":"phosphate-hanna","category":"test","name":"Hanna Checker Marine Phosphate ULR","status":"working","confidence":1,"notes":"Checker confirmado visualmente."},
+    {"id":"nitrate-hanna","category":"test","name":"Hanna Checker Marine Nitrate HR HI782","status":"working","confidence":1,"notes":"Checker confirmado visualmente."},
+    {"id":"magnesium-salifert","category":"test","name":"Salifert Magnesium Profi Test","status":"unknown","confidence":1,"notes":"Visible en armario; verificar caducidad y reactivos."},
+    {"id":"nitrite-salifert","category":"test","name":"Salifert Nitrite NO2 Profi Test","status":"unknown","confidence":1,"notes":"Visible en armario; verificar caducidad y reactivos."}
+  ],
+  "consumables": [
+    {"name":"Nyos Phosphate+","status":"owned","use":"dosificación de fosfato","warning":"No dosificar sin medición y objetivo definido."},
+    {"name":"Nyos Nitrate+","status":"owned","use":"dosificación de nitrato","warning":"No dosificar sin medición y objetivo definido."},
+    {"name":"Aquaforest AF LPS Food","status":"owned","use":"alimento para corales LPS","warning":"No prioritario mientras no haya coral activo."}
+  ],
+  "parameters": [
+    {"key":"temperature","name":"Temperatura","unit":"°C","target":"24–26","latest":null},
+    {"key":"salinity","name":"Salinidad","unit":"ppt","target":"34–35.5","latest":null},
+    {"key":"phosphate","name":"Fosfato PO₄","unit":"ppm","target":"0.03–0.10","latest":null},
+    {"key":"nitrate","name":"Nitrato NO₃","unit":"ppm","target":"2–15","latest":null},
+    {"key":"nitrite","name":"Nitrito NO₂","unit":"ppm","target":"0","latest":null},
+    {"key":"alkalinity","name":"KH","unit":"dKH","target":"7.5–9","latest":null},
+    {"key":"ph","name":"pH","unit":"","target":"7.9–8.4","latest":null},
+    {"key":"magnesium","name":"Magnesio","unit":"ppm","target":"1250–1400","latest":null}
+  ],
+  "automation": {
+    "nero5": {"mode":"Random","referencePercent":30,"source":"owner screenshot","exactScheduleConfirmed":false},
+    "lighting": {"fixture":"Fluval Marine","source":"owner screenshot","exactPointsConfirmed":false,"observed":"Programa diurno aproximado 10:00–22:00; canal morado aparece al 100%, blanco frío alrededor de 20% y rosa alrededor de 10% en la captura. Confirmar valores antes de usar para recomendaciones de coral."}
+  },
+  "risks": [
+    {"priority":1,"title":"Temperatura estival","severity":"high","reason":"El propietario reporta sobretemperatura en verano y la luminaria está dentro de la tapa."},
+    {"priority":2,"title":"Agua de reposición/cambios","severity":"high","reason":"Se ha usado agua de red y el sistema de reposición está averiado."},
+    {"priority":3,"title":"Skimmer averiado","severity":"medium","reason":"Reduce una vía de exportación de orgánicos; primero diagnosticar antes de comprar sustituto."},
+    {"priority":4,"title":"Mantenimiento muy escaso","severity":"medium","reason":"Sustrato no sifonado y filtro con mantenimiento poco frecuente; intervenir gradualmente, no limpiar todo de golpe."}
+  ]
+}

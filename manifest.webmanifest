@@ -1,0 +1,12 @@
+{
+  "name": "Acuario AI · Reef 130 L",
+  "short_name": "Acuario AI",
+  "description": "Seguimiento privado e inteligente del acuario marino de 130 L.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#06131d",
+  "theme_color": "#071825",
+  "lang": "es",
+  "orientation": "portrait-primary",
+  "icons": []
+}
