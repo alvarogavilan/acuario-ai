@@ -10,20 +10,22 @@
   },
   "livestock": [
     {
-      "id": "fish-clown-1",
+      "id": "fish-clown-pair",
       "kind": "fish",
-      "commonName": "Pez payaso",
-      "scientificName": "Amphiprion sp.",
-      "count": 1,
+      "commonName": "Pareja de peces payaso",
+      "scientificName": "Amphiprion ocellaris",
+      "count": 2,
       "status": "alive",
-      "confidence": 0.96,
+      "confidence": 0.94,
       "shop": "Masterfish",
       "purchasePrice": null,
       "marketPrice": null,
-      "marketSource": null,
-      "image": null,
-      "emoji": "🐠",
-      "notes": "Ejemplar visible en fotografías. Especie exacta pendiente de confirmar."
+      "image": "https://www.monaconatureencyclopedia.com/wp-content/uploads/2008/08/1-Amphiprion-ocellaris-%C2%A9-Giuseppe-Mazza.jpg",
+      "individuals": [
+        {"id":"clown-female","label":"Hembra","sex":"female","status":"alive"},
+        {"id":"clown-male","label":"Macho","sex":"male","status":"alive"}
+      ],
+      "notes": "Pareja confirmada por el propietario: una hembra y un macho."
     },
     {
       "id": "fish-blue-tang-1",
@@ -33,29 +35,34 @@
       "count": 1,
       "status": "alive",
       "confidence": 0.99,
-      "shop": "Cetamar",
+      "shop": "Masterfish",
+      "purchaseSize": "S",
       "purchasePrice": null,
-      "marketPrice": null,
-      "marketSource": null,
-      "image": null,
-      "emoji": "🐟",
-      "notes": "Identificación visual de alta confianza. Requiere seguimiento específico por volumen del acuario."
+      "marketPrice": 82.94,
+      "marketCurrency": "EUR",
+      "marketSource": "MasterFisch",
+      "marketCheckedAt": "2026-08-12",
+      "marketUrl": "https://www.masterfisch.es/peces-marinos-pez-cirujano/585-blue-tang.html",
+      "image": "https://tonysharks.com/Tree_of_life/Eukaryote/Opisthokonta/Nanyouhagi/IMG_0123.JPG",
+      "notes": "Comprado en Masterfish en talla S. El precio de mercado mostrado es la referencia actual de la ficha de MasterFisch y puede variar según talla; no representa el precio histórico pagado."
     },
     {
       "id": "fish-blue-yellow-1",
       "kind": "fish",
-      "commonName": "Pez azul de cola amarilla",
-      "scientificName": "Pendiente de identificación",
+      "commonName": "Damisela azul cola amarilla",
+      "scientificName": "Chrysiptera parasema",
       "count": 1,
       "status": "alive",
-      "confidence": 0.55,
+      "confidence": 0.88,
       "shop": "Masterfish",
       "purchasePrice": null,
-      "marketPrice": null,
-      "marketSource": null,
+      "marketPrice": 17.35,
+      "marketCurrency": "EUR",
+      "marketSource": "MasterFisch",
+      "marketCheckedAt": "2026-08-12",
+      "marketUrl": "https://www.masterfisch.es/peces-marinos-damisela/676-yellow-tail-azure-damsel.html",
       "image": null,
-      "emoji": "🐟",
-      "notes": "No fijar especie hasta obtener una fotografía lateral más diagnóstica."
+      "notes": "Identificación probable por patrón azul intenso y cola amarilla. Mantener como identificación de alta probabilidad hasta una nueva foto lateral."
     },
     {
       "id": "cleanup-bee-snails",
@@ -63,15 +70,15 @@
       "commonName": "Caracoles abeja",
       "scientificName": "Pendiente de confirmar",
       "count": 3,
+      "countMin": 2,
+      "countMax": 3,
       "countIsEstimate": true,
       "status": "alive",
       "confidence": 0.45,
       "shop": null,
       "purchasePrice": null,
       "marketPrice": null,
-      "marketSource": null,
       "image": null,
-      "emoji": "🐌",
       "notes": "El propietario estima que quedan 2–3 ejemplares; varios del equipo de limpieza han muerto."
     }
   ],
@@ -93,14 +100,14 @@
     {"name":"Aquaforest AF LPS Food","status":"owned","use":"alimento para corales LPS","warning":"No prioritario mientras no haya coral activo."}
   ],
   "parameters": [
-    {"key":"temperature","name":"Temperatura","unit":"°C","target":"24–26","latest":null},
-    {"key":"salinity","name":"Salinidad","unit":"ppt","target":"34–35.5","latest":null},
-    {"key":"phosphate","name":"Fosfato PO₄","unit":"ppm","target":"0.03–0.10","latest":null},
-    {"key":"nitrate","name":"Nitrato NO₃","unit":"ppm","target":"2–15","latest":null},
-    {"key":"nitrite","name":"Nitrito NO₂","unit":"ppm","target":"0","latest":null},
-    {"key":"alkalinity","name":"KH","unit":"dKH","target":"7.5–9","latest":null},
-    {"key":"ph","name":"pH","unit":"","target":"7.9–8.4","latest":null},
-    {"key":"magnesium","name":"Magnesio","unit":"ppm","target":"1250–1400","latest":null}
+    {"key":"temperature","name":"Temperatura","unit":"°C","target":"24–26","latest":null,"icon":"thermometer"},
+    {"key":"salinity","name":"Salinidad","unit":"ppt","target":"34–35.5","latest":null,"icon":"drop"},
+    {"key":"phosphate","name":"Fosfato PO₄","unit":"ppm","target":"0.03–0.10","latest":null,"icon":"flask"},
+    {"key":"nitrate","name":"Nitrato NO₃","unit":"ppm","target":"2–15","latest":null,"icon":"flask"},
+    {"key":"nitrite","name":"Nitrito NO₂","unit":"ppm","target":"0","latest":null,"icon":"flask"},
+    {"key":"alkalinity","name":"KH","unit":"dKH","target":"7.5–9","latest":null,"icon":"flask"},
+    {"key":"ph","name":"pH","unit":"","target":"7.9–8.4","latest":null,"icon":"flask"},
+    {"key":"magnesium","name":"Magnesio","unit":"ppm","target":"1250–1400","latest":null,"icon":"flask"}
   ],
   "automation": {
     "nero5": {"mode":"Random","referencePercent":30,"source":"owner screenshot","exactScheduleConfirmed":false},
