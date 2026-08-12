@@ -1,0 +1,30 @@
+const supplierProfiles={
+ cetamar:{name:'Cetamar',badge:'Cercanía / recogida',url:'https://www.cetamar.com/es/',strength:'Recogida presencial sin portes para ti, soporte local y animal vivo.',shipping:'0 € si recoges presencialmente',location:'Los Palacios y Villafranca, Sevilla',score:9.3},
+ submersa:{name:'Submersa',badge:'Calidad / coral',url:'https://submersa.es/',strength:'Especialista marino, coral WYSIWYG, cuarentena y equipamiento premium.',shipping:'Gratis desde 110 € en Península; animal vivo se gestiona aparte',location:'Online España',score:9.1},
+ masterfisch:{name:'MasterFisch',badge:'Precio / variedad peces',url:'https://www.masterfisch.es/',strength:'Gran catálogo de peces marinos, múltiples tallas y entrega express.',shipping:'Animal vivo con portes específicos; total se verifica antes de recomendar',location:'Online UE',score:8.7},
+ corales:{name:'Corales.com',badge:'Calidad-precio equipo',url:'https://www.corales.com/',strength:'Catálogo amplio de equipamiento marino y larga especialización.',shipping:'Se calcula según pedido y destino',location:'Online España',score:8.8}
+};
+const livestockOffers={
+ 'fish-blue-tang-1':[
+  {tier:'Más económica publicada',shop:'MasterFisch',price:82.94,shipping:null,total:null,rating:null,note:'Paracanthurus hepatus; varias tallas. Envío excluido, por lo que el total real debe confirmarse antes de comprar.',url:'https://www.masterfisch.es/peces-marinos-pez-cirujano/585-blue-tang.html'},
+  {tier:'Cercanía / valoración',shop:'Cetamar',price:94.85,shipping:0,total:94.85,rating:'10/10 · 5 opiniones',note:'Talla M publicada. Para ti la recogida presencial evita portes.',url:'https://www.cetamar.com/es/peces-cirujano/2517-paracanthurus-hepatus-talla-m.html'}
+ ],
+ 'fish-clown-pair':[
+  {tier:'Más económica local',shop:'Cetamar',price:16.00,shipping:0,total:16.00,rating:'9/10 · 4 opiniones',note:'Ocellaris de cultivo talla S. Recogida presencial = 0 € de portes.',url:'https://www.cetamar.com/es/peces-payaso/5723-amphiprion-ocellaris-cultivo-talla-s.html'},
+  {tier:'Mejor valoración local',shop:'Cetamar',price:29.50,shipping:0,total:29.50,rating:'10/10 · 2 opiniones',note:'Ocellaris de cultivo talla M.',url:'https://www.cetamar.com/es/peces-payaso/5519-amphiprion-ocellaris-cultivo-talla-m.html'},
+  {tier:'Alternativa online',shop:'MasterFisch',price:13.44,shipping:null,total:null,rating:null,note:'Precio indexado para ejemplar bred; portes de animal vivo no incluidos.',url:'https://www.masterfisch.es/69-mejor-venta'}
+ ]
+};
+const coralSources=[
+ {tier:'Mayor calidad / trazabilidad',profile:'submersa',detail:'Prioridad para LPS, blandos y SPS cuando el Director Reef autorice coral. WYSIWYG y garantía publicada de 7 días.',url:'https://submersa.es/collections/corales-lps'},
+ {tier:'Más cercana',profile:'cetamar',detail:'Útil para ver el animal presencialmente y eliminar portes si lo recoges tú.',url:'https://www.cetamar.com/es/'},
+ {tier:'Comparación adicional',profile:'masterfisch',detail:'Se usa para comparar variedad/precio cuando exista la misma especie y talla.',url:'https://www.masterfisch.es/'}
+];
+function sourceMoney(v){return v==null?'Pendiente':new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(v)}
+function supplierMatrix(){return `<section class="source-panel"><div class="source-head"><div><small>RADAR DE PROVEEDORES · CP 41020</small><h3>3 criterios antes de comprar</h3></div><span>Actualizado 12/08/2026</span></div><p>No elegimos una tienda por costumbre: comparamos coste total, calidad/garantía y cercanía. Si falta el porte exacto no proclamamos un ganador absoluto.</p><div class="supplier-grid">${Object.values(supplierProfiles).map(s=>`<a class="supplier-card" href="${s.url}" target="_blank" rel="noopener"><div><b>${s.name}</b><em>${s.badge}</em></div><small>${s.strength}</small><small>${s.shipping}</small><strong>${s.score.toFixed(1)}/10 interno</strong></a>`).join('')}</div></section>`}
+function livestockSourcing(id){const offers=livestockOffers[id];if(!offers?.length)return `<section class="source-panel"><small>COMPARADOR DE COMPRA</small><h3>La especie se comparará antes de adquirir</h3><p>Cuando el Director Reef autorice un nuevo ejemplar, Compras buscará 2–3 opciones actuales: económica, calidad/valoración y cercanía a 41020. No se reutilizarán precios antiguos.</p></section>`;return `<section class="source-panel"><small>COMPARADOR DE ESTA ESPECIE</small><h3>Opciones actuales de referencia</h3><div class="offer-compare">${offers.map(o=>`<a href="${o.url}" target="_blank" rel="noopener" class="source-offer"><em>${o.tier}</em><b>${o.shop}</b><span>Producto ${sourceMoney(o.price)} · envío ${o.shipping==null?'por verificar':sourceMoney(o.shipping)} · total ${sourceMoney(o.total)}</span>${o.rating?`<span>Valoración ${o.rating}</span>`:''}<small>${o.note}</small></a>`).join('')}</div><p class="source-warning">Una oferta no se convierte en recomendación de compra hasta que Peces confirme compatibilidad, volumen, carga y estado actual del acuario.</p></section>`}
+function coralSourcing(){return `<section class="source-panel"><small>FUENTES PARA FUTUROS CORALES</small><h3>Económico · calidad · cercanía</h3><div class="offer-compare">${coralSources.map(x=>{const s=supplierProfiles[x.profile];return `<a href="${x.url}" target="_blank" rel="noopener" class="source-offer"><em>${x.tier}</em><b>${s.name}</b><span>${s.shipping}</span><small>${x.detail}</small></a>`}).join('')}</div><p class="source-warning">Actualmente el Director Reef mantiene bloqueada la compra de coral hasta completar la analítica y estabilizar temperatura/reposición.</p></section>`}
+const previousShowEntity=showEntity;
+showEntity=function(type,id){previousShowEntity(type,id);setTimeout(()=>{const c=document.querySelector('#entityDialogContent');if(!c)return;if(type==='livestock')c.insertAdjacentHTML('beforeend',livestockSourcing(id));},0)};
+const previousAdvisorSourcing=advisorView;
+advisorView=function(){return previousAdvisorSourcing()+supplierMatrix()+coralSourcing()};
