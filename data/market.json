@@ -1,0 +1,36 @@
+{
+  "updatedAt": "2026-08-12T16:10:00+02:00",
+  "currency": "EUR",
+  "livestock": {
+    "fish-clown-1": {
+      "scientificName": "Amphiprion ocellaris",
+      "identificationConfidence": 0.96,
+      "marketPrice": 14.50,
+      "regularPrice": 24.16,
+      "sourceSite": "MasterFisch",
+      "sourceUrl": "https://www.masterfisch.es/19-peces-marinos-pez-payaso",
+      "availability": "available",
+      "notes": "Referencia de mercado para Amphiprion ocellaris de cría; confirmar variante exacta antes de considerar el precio definitivo del ejemplar."
+    },
+    "fish-blue-tang-1": {
+      "scientificName": "Paracanthurus hepatus",
+      "identificationConfidence": 0.99,
+      "marketPrice": 94.85,
+      "regularPrice": 97.78,
+      "sourceSite": "Cetamar",
+      "sourceUrl": "https://www.cetamar.com/es/peces-cirujano/2517-paracanthurus-hepatus-talla-m.html",
+      "availability": "low_stock",
+      "notes": "Precio observado para talla M. El valor real del ejemplar depende de su talla actual."
+    },
+    "fish-blue-yellow-1": {
+      "commonName": "Damisela cola amarilla",
+      "scientificName": "Chrysiptera parasema",
+      "identificationConfidence": 0.93,
+      "marketPrice": 17.35,
+      "sourceSite": "MasterFisch",
+      "sourceUrl": "https://www.masterfisch.es/peces-marinos-damisela/676-yellow-tail-azure-damsel.html",
+      "availability": "available",
+      "notes": "La forma y patrón visible coinciden con Chrysiptera parasema; identificación elevada pero se conserva trazabilidad como identificación visual."
+    }
+  }
+}
