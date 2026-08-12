@@ -1,1 +1,82 @@
-{"aquarium":{"name":"Reef 130 L","volumeLiters":130,"type":"marine","location":"Sevilla 41020","status":"baseline","startedApprox":"2022-12","goals":["estabilizar temperatura","eliminar dependencia de agua de red","recuperar skimmer","volver a mantener coral"]},"livestock":[{"id":"fish-clown-pair","kind":"fish","commonName":"Pareja de peces payaso","scientificName":"Amphiprion ocellaris","count":2,"status":"alive","confidence":0.99,"shop":"Cetamar","purchaseDateApprox":"2023-01","purchasePrice":null,"individuals":[{"id":"clown-female","label":"Hembra","sex":"female","status":"alive"},{"id":"clown-male","label":"Macho","sex":"male","status":"alive"}],"notes":"El propietario confirma que los dos ocellaris actuales fueron comprados en Cetamar poco después del primer pedido de bombas; se consideran los mismos ejemplares actuales salvo evidencia posterior en Masterfish."},{"id":"fish-blue-tang-1","kind":"fish","commonName":"Cirujano azul","scientificName":"Paracanthurus hepatus","count":1,"status":"alive","confidence":0.99,"shop":"Masterfish","purchaseSize":"S","purchasePrice":null,"marketPrice":82.94,"marketCurrency":"EUR","marketSource":"MasterFisch","marketCheckedAt":"2026-08-12","marketUrl":"https://www.masterfisch.es/peces-marinos-pez-cirujano/585-blue-tang.html","notes":"Comprado en Masterfish en talla S. Pendiente cruzar con historial Masterfish."},{"id":"fish-blue-yellow-1","kind":"fish","commonName":"Damisela azul cola amarilla","scientificName":"Chrysiptera parasema","count":1,"status":"alive","confidence":0.88,"shop":"Masterfish","purchasePrice":null,"marketPrice":17.35,"marketCurrency":"EUR","marketSource":"MasterFisch","marketCheckedAt":"2026-08-12","marketUrl":"https://www.masterfisch.es/peces-marinos-damisela/676-yellow-tail-azure-damsel.html","notes":"Identificación probable hasta nueva foto lateral; pendiente cruzar con historial Masterfish."},{"id":"cleanup-bee-snails","kind":"invertebrate","commonName":"Caracoles abeja","scientificName":"Pendiente de confirmar","count":3,"countMin":2,"countMax":3,"countIsEstimate":true,"status":"alive","confidence":0.45,"notes":"El propietario estima que quedan 2–3 ejemplares."}],"historicalLivestock":[{"commonName":"Foxface / pez conejo amarillo","scientificName":"Siganus vulpinus","purchaseSize":"S","shop":"Cetamar","status":"historical","purchaseDate":null,"notes":"Existió en el acuario; evidencia adicional: aviso de reposición de stock de Cetamar aportado por el propietario. No confundir con población actual."}],"equipment":[{"id":"flow-nero5","category":"flow","name":"AI Nero 5","status":"working","purchasePrice":259,"purchaseSource":"Submersa"},{"id":"flow-tunze-6040","category":"flow","name":"Tunze Turbelle Nanostream 6040","status":"historical_owned","purchaseSource":"Cetamar","purchaseDate":"2023-01-07"},{"id":"topoff-dd","category":"topoff","name":"D-D H2Ocean Compact ATO","status":"broken","purchasePrice":99.90,"purchaseSource":"Submersa","purchaseDate":"2023-05-15"},{"id":"doser-aquamedic-evo5","category":"dosing","name":"Aqua Medic Reefdoser EVO 5","status":"owned_unused","purchasePrice":179.90,"purchaseSource":"Submersa","purchaseDate":"2023-05-20"},{"id":"temp-controller-aquamedic","category":"temperature","name":"Aqua Medic T controller twin","status":"partially_broken"},{"id":"heater-aquamedic-200w","category":"temperature","name":"Aqua Medic calentador de titanio 200 W","status":"historical_owned","purchasePrice":48.70,"purchaseSource":"Submersa","purchaseDate":"2023-01-12"},{"id":"ro-premium-400","category":"water","name":"Ósmosis Inversa Premium 4 etapas 400 L/día","status":"historical_owned","purchasePrice":142.90,"purchaseSource":"Submersa","purchaseDate":"2023-01-09"},{"id":"vacuum-eheim","category":"maintenance","name":"EHEIM Quick Vac pro","status":"working"},{"id":"salinity-hanna","category":"test","name":"Hanna Marine Salinity Tester HI98319","status":"working"}],"hardscape":[{"name":"Aquaforest AF Rock Mix","amount":"18 kg","purchaseDate":"2022-12-17","shop":"Submersa","price":138,"status":"installed_historical_origin","notes":"Roca del montaje inicial; probable base del aquascape actual."},{"name":"Aquaforest Stone Fix","amount":"1500 g","purchaseDate":"2022-12-17","shop":"Submersa","price":13.20,"status":"used_historical_origin","notes":"Mortero/cemento para fijación del aquascape inicial."}],"purchaseHistory":[{"date":"2022-12-17","shop":"Submersa","order":"20090","subtotal":151.20,"shipping":0,"paymentFee":3.37,"total":154.57,"payment":"PayPal","items":[{"name":"Aquaforest AF Rock Mix 18 kg","qty":1,"price":138},{"name":"Aquaforest Stone Fix 1500 g","qty":1,"price":13.20}]},{"date":"2023-01-07","shop":"Cetamar","total":177.40,"shipping":0,"items":[{"name":"Tunze Turbelle Nanostream 6040","qty":1},{"name":"Red Sea Coral Pro Salt 7 kg","qty":1},{"name":"Densímetro con termómetro","qty":1},{"name":"Seachem Prime 250 ml","qty":1}]},{"date":"2023-01","shop":"Cetamar","total":null,"shipping":0,"items":[{"name":"Amphiprion ocellaris","qty":2,"price":null}],"note":"Compra añadida por confirmación directa del propietario; fecha y precio exactos pendientes."}],"provenanceNotes":["Los dos Amphiprion ocellaris actuales se enlazan provisionalmente a la compra Cetamar indicada por el propietario.","Siganus vulpinus talla S se registra solo como animal histórico; el aviso de stock demuestra interés/evidencia comercial pero no aporta fecha ni precio de compra.","Los animales actuales de Masterfish se mantendrán pendientes de conciliación hasta recibir ese historial."]}
+{
+  "aquarium": {
+    "name": "Fluval Flex Marine 123 L",
+    "model": "Fluval Flex Marine 123 L",
+    "modelNumber": "14994",
+    "nominalCapacityLiters": 123,
+    "externalDimensionsCm": {"length":82,"depth":40,"height":39},
+    "externalBoundingBoxLiters": 127.92,
+    "operationalWaterEstimateLiters": {"min":100,"max":110,"status":"estimate-only"},
+    "volumeLiters": 123,
+    "type": "marine",
+    "location": "Sevilla 41020",
+    "status": "baseline",
+    "startedApprox": "2022-12",
+    "goals": ["estabilizar temperatura","usar agua adecuada","recuperar skimmer","recuperar reposición automática","volver a mantener coral"]
+  },
+  "livestock": [
+    {"id":"fish-clown-pair","kind":"fish","commonName":"Pareja de peces payaso","scientificName":"Amphiprion ocellaris","count":2,"status":"alive","confidence":0.99,"shop":"Cetamar","purchaseDateApprox":"2023-01","purchasePrice":null,"image":"https://www.monaconatureencyclopedia.com/wp-content/uploads/2008/08/1-Amphiprion-ocellaris-%C2%A9-Giuseppe-Mazza.jpg","individuals":[{"id":"clown-female","label":"Hembra","sex":"female","status":"alive"},{"id":"clown-male","label":"Macho","sex":"male","status":"alive"}],"notes":"Pareja original. Primeros peces del acuario; continúan vivos. La pareja Black Ocellaris posterior murió tras ataques de esta pareja."},
+    {"id":"fish-blue-tang-1","kind":"fish","commonName":"Cirujano azul","scientificName":"Paracanthurus hepatus","count":1,"status":"alive","confidence":0.99,"shop":"Masterfish","purchaseSize":"S","purchasePrice":null,"marketPrice":82.94,"marketCurrency":"EUR","marketSource":"MasterFisch","marketCheckedAt":"2026-08-12","marketUrl":"https://www.masterfisch.es/peces-marinos-pez-cirujano/585-blue-tang.html","image":"https://tonysharks.com/Tree_of_life/Eukaryote/Opisthokonta/Nanyouhagi/IMG_0123.JPG","notes":"Comprado en Masterfish en talla S. Precio histórico pendiente de confirmar."},
+    {"id":"fish-blue-yellow-1","kind":"fish","commonName":"Damisela azul cola amarilla","scientificName":"Chrysiptera parasema","count":1,"status":"alive","confidence":0.88,"shop":"Masterfish","purchasePrice":null,"marketPrice":17.35,"marketCurrency":"EUR","marketSource":"MasterFisch","marketCheckedAt":"2026-08-12","marketUrl":"https://www.masterfisch.es/peces-marinos-damisela/676-yellow-tail-azure-damsel.html","image":null,"notes":"Identificación visual probable hasta nueva foto lateral."},
+    {"id":"cleanup-bee-snails","kind":"invertebrate","commonName":"Caracoles abeja","scientificName":"Pendiente de confirmar","count":3,"countMin":2,"countMax":3,"countIsEstimate":true,"status":"alive","confidence":0.45,"shop":null,"purchasePrice":null,"marketPrice":null,"image":null,"notes":"Se estima que quedan 2–3 ejemplares."}
+  ],
+  "historicalLivestock": [
+    {"commonName":"Gamba limpiadora inicial","scientificName":"Lysmata sp.","status":"historical","notes":"Primer animal introducido junto al primer coral verde Hulk; especie exacta pendiente."},
+    {"commonName":"Coral verde Hulk inicial","scientificName":"LPS pendiente de confirmar","status":"historical","notes":"Primer coral del acuario, una cabeza, introducido el mismo día que la primera gamba."},
+    {"commonName":"Pareja Black Ocellaris","scientificName":"Amphiprion ocellaris variante Black","status":"dead","shop":"Masterfish","notes":"Murieron tras ataques de la pareja original de ocellaris."},
+    {"commonName":"Foxface / pez conejo amarillo","scientificName":"Siganus vulpinus","purchaseSize":"S","shop":"Cetamar","status":"historical","notes":"Existió en el acuario; ya no forma parte de la población actual."}
+  ],
+  "equipment": [
+    {"id":"filter-eheim","category":"filtration","name":"EHEIM Professionel 4+ 250","status":"working","confidence":1,"notes":"Filtro externo principal confirmado."},
+    {"id":"flow-nero5","category":"flow","name":"AI Nero 5","status":"working","confidence":1,"purchasePrice":259,"purchaseSource":"Submersa","purchaseDate":"2023-05-20","notes":"Bomba principal. Pedido histórico confirma 259,00 € + Nero 5 Guard."},
+    {"id":"flow-tunze-6040","category":"flow","name":"Tunze Turbelle Nanostream 6040","status":"historical_owned","confidence":1,"purchaseSource":"Cetamar","purchaseDate":"2023-01-07","notes":"Bomba histórica/posiblemente aún disponible; confirmar ubicación actual."},
+    {"id":"skimmer-tunze","category":"skimmer","name":"Tunze Comline DOC Skimmer","model":"Probable 9004","status":"broken","confidence":0.72,"notes":"Skimmer averiado. Confirmar etiqueta antes de comprar recambio."},
+    {"id":"light-fluval","category":"lighting","name":"Fluval Marine 3.0 LED para Flex Marine 123 L","model":"luminaria incluida en pack; recambio 14513","status":"working","confidence":0.98,"notes":"Instalada dentro de la tapa; factor de carga térmica en verano."},
+    {"id":"topoff-dd","category":"topoff","name":"D-D H2Ocean Compact ATO","status":"broken","confidence":1,"purchasePrice":99.90,"purchaseSource":"Submersa","purchaseDate":"2023-05-15","notes":"Sistema de reposición automática identificado y averiado."},
+    {"id":"doser-aquamedic-evo5","category":"dosing","name":"Aqua Medic Reefdoser EVO 5","model":"EVO 5","status":"owned_unused","confidence":1,"purchasePrice":179.90,"purchaseSource":"Submersa","purchaseDate":"2023-05-20","notes":"Comprado y nunca usado. Mantener desactivado hasta línea base, consumo real y calibración."},
+    {"id":"temp-controller-aquamedic","category":"temperature","name":"Aqua Medic T controller twin","status":"partially_broken","confidence":1,"notes":"Salida de frío reportada como averiada."},
+    {"id":"heater-aquamedic-200w","category":"temperature","name":"Aqua Medic calentador de titanio 200 W","status":"historical_owned","confidence":1,"purchasePrice":48.70,"purchaseSource":"Submersa","purchaseDate":"2023-01-12"},
+    {"id":"ro-premium-400","category":"water","name":"Ósmosis Inversa Premium 4 etapas 400 L/día","status":"historical_owned","confidence":1,"purchasePrice":142.90,"purchaseSource":"Submersa","purchaseDate":"2023-01-09","notes":"Equipo de ósmosis usado en el pasado; el propietario no desea depender de él por dificultad de uso."},
+    {"id":"vacuum-eheim","category":"maintenance","name":"EHEIM Quick Vac pro","status":"working","confidence":1,"notes":"Aspirador de fondo disponible."},
+    {"id":"salinity-hanna","category":"test","name":"Hanna Marine Salinity Tester HI98319","status":"working","confidence":1,"purchasePrice":89.90,"purchaseSource":"Submersa","purchaseDate":"2023-01-12"},
+    {"id":"phosphate-hanna","category":"test","name":"Hanna Checker Marine Phosphate ULR HI774","status":"working","confidence":1,"notes":"Checker disponible."},
+    {"id":"nitrate-hanna","category":"test","name":"Hanna Checker Marine Nitrate HR HI782","status":"working","confidence":1,"notes":"Checker disponible."},
+    {"id":"magnesium-salifert","category":"test","name":"Salifert Magnesium Profi Test","status":"unknown","confidence":1,"notes":"Comprobar caducidad/reactivos."},
+    {"id":"nitrite-salifert","category":"test","name":"Salifert Nitrite NO2 Profi Test","status":"unknown","confidence":1,"notes":"Comprobar caducidad/reactivos."}
+  ],
+  "consumables": [
+    {"name":"Nyos Phosphate+","status":"owned","use":"dosificación de fosfato","warning":"No dosificar sin medición y objetivo definido."},
+    {"name":"Nyos Nitrate+","status":"owned","use":"dosificación de nitrato","warning":"No dosificar sin medición y objetivo definido."},
+    {"name":"Aquaforest AF LPS Food","status":"owned","use":"alimento LPS","warning":"No prioritario sin corales actuales."},
+    {"name":"Seachem MatrixCarbon 500 ml","status":"owned","purchasePrice":29.90,"purchaseSource":"Submersa"}
+  ],
+  "parameters": [
+    {"key":"temperature","name":"Temperatura","unit":"°C","target":"24–26","latest":null,"icon":"thermometer"},
+    {"key":"salinity","name":"Salinidad","unit":"ppt","target":"34–35.5","latest":null,"icon":"drop"},
+    {"key":"phosphate","name":"Fosfato PO₄","unit":"ppm","target":"0.03–0.10","latest":null,"icon":"flask"},
+    {"key":"nitrate","name":"Nitrato NO₃","unit":"ppm","target":"2–15","latest":null,"icon":"flask"},
+    {"key":"nitrite","name":"Nitrito NO₂","unit":"ppm","target":"0","latest":null,"icon":"flask"},
+    {"key":"alkalinity","name":"KH","unit":"dKH","target":"7.5–9","latest":null,"icon":"flask"},
+    {"key":"ph","name":"pH","unit":"","target":"7.9–8.4","latest":null,"icon":"flask"},
+    {"key":"magnesium","name":"Magnesio","unit":"ppm","target":"1250–1400","latest":null,"icon":"flask"}
+  ],
+  "automation": {
+    "nero5":{"mode":"Random","referencePercent":30,"source":"owner screenshot","exactScheduleConfirmed":false},
+    "lighting":{"fixture":"Fluval Marine 3.0 para Flex Marine 123 L","source":"owner screenshot","exactPointsConfirmed":false,"observed":"Curva histórica capturada; la app mantiene un perfil de recuperación independiente hasta confirmar temperatura y PAR."}
+  },
+  "risks": [
+    {"priority":1,"title":"Temperatura estival","severity":"high","reason":"Sobretemperatura reportada; luz dentro de tapa y controlador de frío averiado."},
+    {"priority":2,"title":"Agua de reposición/cambios","severity":"high","reason":"Uso de agua de red y ATO averiado."},
+    {"priority":3,"title":"Skimmer averiado","severity":"medium","reason":"Falta una vía de exportación de orgánicos; diagnosticar antes de sustituir."},
+    {"priority":4,"title":"Mantenimiento muy escaso","severity":"medium","reason":"Fondo no sifonado habitualmente; intervenir por zonas y de forma progresiva."}
+  ],
+  "hardscape": [
+    {"name":"Aquaforest AF Rock Mix","amount":"18 kg","purchaseDate":"2022-12-17","shop":"Submersa","price":138,"status":"installed_historical_origin"},
+    {"name":"Aquaforest Stone Fix","amount":"1500 g","purchaseDate":"2022-12-17","shop":"Submersa","price":13.20,"status":"used_historical_origin"}
+  ],
+  "purchaseHistory": [
+    {"date":"2022-12-17","shop":"Submersa","order":"20090","subtotal":151.20,"shipping":0,"paymentFee":3.37,"total":154.57,"payment":"PayPal","items":[{"name":"Aquaforest AF Rock Mix 18 kg","qty":1,"price":138},{"name":"Aquaforest Stone Fix 1500 g","qty":1,"price":13.20}]},
+    {"date":"2023-01-07","shop":"Cetamar","total":177.40,"shipping":0,"items":[{"name":"Tunze Turbelle Nanostream 6040","qty":1},{"name":"Red Sea Coral Pro Salt 7 kg","qty":1},{"name":"Densímetro con termómetro","qty":1},{"name":"Seachem Prime 250 ml","qty":1}]},
+    {"date":"2023-01","shop":"Cetamar","total":null,"shipping":0,"items":[{"name":"Amphiprion ocellaris","qty":2,"price":null}],"note":"Pareja original actual; primeros peces."}
+  ]
+}
