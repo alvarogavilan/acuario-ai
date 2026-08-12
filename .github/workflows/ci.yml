@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate JavaScript
         run: |
-          for f in app.js enhancements.js individuals.js experts.js catalog-v07.js commerce.js budget.js installations.js director.js sourcing.js virtual-reef.js sw.js; do
+          for f in app.js enhancements.js individuals.js experts.js catalog-v07.js commerce.js budget.js installations.js director.js sourcing.js virtual-reef.js candidate-lab.js sw.js; do
             node --check "$f"
           done
       - name: Validate JSON
@@ -41,3 +41,4 @@ jobs:
           test -f installations.js && test -f commerce.js
           test -f sourcing.js && test -f sourcing.css
           test -f virtual-reef.js && test -f virtual-reef.css
+          test -f candidate-lab.js && test -f candidate-lab.css
