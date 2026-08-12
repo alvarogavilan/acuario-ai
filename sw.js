@@ -1,5 +1,5 @@
-const CACHE='acuario-ai-v1.2.0';
-const ASSETS=['./','index.html','styles.css','experts.css','catalog-v07.css','commerce.css','installations.css','director.css','sourcing.css','virtual-reef.css','app.js','enhancements.js','individuals.js','experts.js','catalog-v07.js','commerce.js','budget.js','installations.js','director.js','sourcing.js','virtual-reef.js','manifest.webmanifest','data/aquarium.json'];
+const CACHE='acuario-ai-v1.3.0';
+const ASSETS=['./','index.html','styles.css','experts.css','catalog-v07.css','commerce.css','installations.css','director.css','sourcing.css','virtual-reef.css','candidate-lab.css','app.js','enhancements.js','individuals.js','experts.js','catalog-v07.js','commerce.js','budget.js','installations.js','director.js','sourcing.js','virtual-reef.js','candidate-lab.js','manifest.webmanifest','data/aquarium.json'];
 self.addEventListener('install',event=>{self.skipWaiting();event.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)))});
 self.addEventListener('activate',event=>event.waitUntil(Promise.all([self.clients.claim(),caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))])));
 self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;event.respondWith(fetch(event.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(event.request,copy));return r}).catch(()=>caches.match(event.request).then(r=>r||caches.match('./'))))});
