@@ -1,6 +1,6 @@
 (()=>{
 'use strict';
-const V='2.0';
+const V='2.1';
 const S=.08;
 let buildId=0;
 const $=(s,r=document)=>r.querySelector(s);
@@ -8,224 +8,111 @@ const $$=(s,r=document)=>[...r.querySelectorAll(s)];
 
 function loadThree(){
   if(window.THREE)return Promise.resolve(window.THREE);
-  return new Promise((ok,no)=>{
-    const s=document.createElement('script');
-    s.src='https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';
-    s.onload=()=>ok(window.THREE); s.onerror=no; document.head.appendChild(s);
-  });
+  return new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';s.onload=()=>ok(window.THREE);s.onerror=no;document.head.appendChild(s)});
 }
 
 function patchCopy(){
   const intro=$('.aquarium-intro'); if(!intro)return;
   const k=$('.kicker',intro),h=$('h2',intro),p=$('p:not(.kicker)',intro);
-  if(k)k.textContent='MI ACUARIO · RECONSTRUCCIÓN 3D';
-  if(h)h.textContent='Tu Fluval Flex Marine 123, reconstruido';
-  if(p)p.textContent='Modelo calibrado con tus fotografías frontal, laterales, superior y cinta métrica. La urna y el aquascape son la referencia fija; animales y propuestas se muestran a escala.';
+  if(k)k.textContent='MI ACUARIO · GEOMETRÍA REAL V2.1';
+  if(h)h.textContent='Aquascape reconstruido desde tus fotos';
+  if(p)p.textContent='La roca ya no se genera como montones aleatorios. La forma principal de cada isla, sus plataformas, huecos, alturas y voladizos se trazan desde las vistas frontal, laterales y superior con escala 82 × 40 × 39 cm.';
 }
 
 function boot(){
-  patchCopy();
-  const host=$('#myAquarium3d');
-  if(!host||host.dataset.v20==='1')return;
-  host.dataset.v20='1';
-  const id=++buildId;
-  loadThree().then(T=>{if(id===buildId&&document.body.contains(host))build(host,T)}).catch(()=>{
-    host.innerHTML='<div class="aq20-error"><b>No se pudo cargar el motor 3D.</b><span>Comprueba conexión y vuelve a abrir Mi acuario.</span></div>';
-  });
+  patchCopy(); const host=$('#myAquarium3d'); if(!host||host.dataset.v21==='1')return;
+  host.dataset.v21='1'; const id=++buildId;
+  loadThree().then(T=>{if(id===buildId&&document.body.contains(host))build(host,T)}).catch(()=>{host.innerHTML='<div class="aq20-error"><b>No se pudo cargar el motor 3D.</b><span>Comprueba conexión y vuelve a abrir Mi acuario.</span></div>'});
 }
 
 function build(host,T){
   host.innerHTML='';
   const W=Math.max(320,host.clientWidth),H=Math.max(470,Math.round(W*.74));
-  const scene=new T.Scene();
-  scene.background=new T.Color(0x06111a);
-  scene.fog=new T.FogExp2(0x061722,.018);
-  const camera=new T.PerspectiveCamera(34,W/H,.05,70);
-  camera.position.set(0,.15,9.25);
-  const renderer=new T.WebGLRenderer({antialias:true,powerPreference:'high-performance'});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.8));
-  renderer.setSize(W,H); renderer.outputColorSpace=T.SRGBColorSpace;
-  renderer.toneMapping=T.ACESFilmicToneMapping; renderer.toneMappingExposure=1.08;
-  renderer.shadowMap.enabled=true; renderer.shadowMap.type=T.PCFSoftShadowMap;
-  host.appendChild(renderer.domElement);
-  const world=new T.Group(); scene.add(world);
-
-  scene.add(new T.HemisphereLight(0x9edbff,0x071015,1.25));
-  const sun=new T.DirectionalLight(0xd7efff,3.2); sun.position.set(-1.2,5.2,3.4); sun.castShadow=true; scene.add(sun);
-  const blue=new T.PointLight(0x315cff,15,14,1.8); blue.position.set(.2,3.1,1.4); scene.add(blue);
-  const cyan=new T.PointLight(0x53cfff,5,8,2); cyan.position.set(-2.7,.9,2.1); scene.add(cyan);
+  const scene=new T.Scene(); scene.background=new T.Color(0x06111a); scene.fog=new T.FogExp2(0x061722,.016);
+  const camera=new T.PerspectiveCamera(33,W/H,.05,70); camera.position.set(0,.08,9.35);
+  const renderer=new T.WebGLRenderer({antialias:true,powerPreference:'high-performance'}); renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.7));renderer.setSize(W,H);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.04;renderer.shadowMap.enabled=true;host.appendChild(renderer.domElement);
+  const world=new T.Group();scene.add(world);
+  scene.add(new T.HemisphereLight(0xa4dfff,0x071015,1.20));
+  const top=new T.DirectionalLight(0xd7efff,3.0);top.position.set(-1,5,3);top.castShadow=true;scene.add(top);
+  const blue=new T.PointLight(0x315cff,13,14,1.8);blue.position.set(.1,3,1.3);scene.add(blue);
 
   const tankW=82*S,tankD=40*S,tankH=39*S;
-  const glassMat=new T.MeshPhysicalMaterial({color:0xbcefff,transparent:true,opacity:.06,roughness:.02,transmission:.96,thickness:.035,side:T.DoubleSide});
-  const waterMat=new T.MeshPhysicalMaterial({color:0x0d6280,transparent:true,opacity:.07,roughness:.06,transmission:.82,thickness:.12});
-  const water=new T.Mesh(new T.BoxGeometry(tankW-.13,tankH-.20,tankD-.13),waterMat); water.position.y=.01; world.add(water);
-  [-tankW/2,tankW/2].forEach(x=>{const g=new T.Mesh(new T.BoxGeometry(.03,tankH,tankD),glassMat);g.position.x=x;world.add(g)});
-  const back=new T.Mesh(new T.BoxGeometry(tankW,tankH,.03),glassMat); back.position.z=-tankD/2; world.add(back);
-  const rimMat=new T.MeshStandardMaterial({color:0xe9eceb,roughness:.32});
-  [[tankH/2+.04,.10],[-tankH/2-.05,.12]].forEach(([y,h])=>{const r=new T.Mesh(new T.BoxGeometry(tankW+.12,h,tankD+.10),rimMat);r.position.y=y;world.add(r)});
+  const glass=new T.MeshPhysicalMaterial({color:0xc4f3ff,transparent:true,opacity:.052,roughness:.02,transmission:.97,thickness:.03,side:T.DoubleSide});
+  const water=new T.Mesh(new T.BoxGeometry(tankW-.14,tankH-.20,tankD-.14),new T.MeshPhysicalMaterial({color:0x0b607e,transparent:true,opacity:.055,roughness:.04,transmission:.86,thickness:.10}));water.position.y=.01;world.add(water);
+  [-tankW/2,tankW/2].forEach(x=>{const m=new T.Mesh(new T.BoxGeometry(.028,tankH,tankD),glass);m.position.x=x;world.add(m)});
+  const rear=new T.Mesh(new T.BoxGeometry(tankW,tankH,.028),glass);rear.position.z=-tankD/2;world.add(rear);
+  const rimMat=new T.MeshStandardMaterial({color:0xe7e9e8,roughness:.32});
+  [[tankH/2+.035,.10],[-tankH/2-.045,.12]].forEach(([y,h])=>{const m=new T.Mesh(new T.BoxGeometry(tankW+.12,h,tankD+.10),rimMat);m.position.y=y;world.add(m)});
 
-  // Sustrato realista, 3–5 cm, con ligera acumulación hacia roca y laterales.
-  const sg=new T.PlaneGeometry(tankW-.18,tankD-.18,58,32),pa=sg.attributes.position;
-  for(let i=0;i<pa.count;i++){
-    const x=pa.getX(i),z=pa.getY(i);
-    const dune=.025*Math.sin(x*2.2)+.018*Math.cos(z*4.1)+.012*Math.sin((x+z)*7.4);
-    const bank=.035*(Math.abs(x)/(tankW/2)); pa.setZ(i,dune+bank);
+  const sg=new T.PlaneGeometry(tankW-.18,tankD-.18,54,30),sp=sg.attributes.position;
+  for(let i=0;i<sp.count;i++){const x=sp.getX(i),z=sp.getY(i);sp.setZ(i,.018*Math.sin(x*2.4)+.014*Math.cos(z*4.3)+.008*Math.sin((x-z)*7.2)+.026*Math.abs(x)/(tankW/2))}sg.computeVertexNormals();
+  const sand=new T.Mesh(sg,new T.MeshStandardMaterial({color:0xd8cfb7,roughness:1}));sand.rotation.x=-Math.PI/2;sand.position.y=-1.42;sand.receiveShadow=true;world.add(sand);
+
+  const technical=new T.Mesh(new T.BoxGeometry(.61,2.58,.17),new T.MeshStandardMaterial({color:0x11171c,roughness:.88}));technical.position.set(.04,-.04,-1.45);world.add(technical);
+
+  const rockMats=[0x745a4d,0x685146,0x7b6154,0x5d4b43].map(c=>new T.MeshStandardMaterial({color:c,roughness:.99}));
+  function poly(points,depth,z,mat=0,bevel=.06){
+    const s=new T.Shape();points.forEach((p,i)=>i?s.lineTo(p[0],p[1]):s.moveTo(p[0],p[1]));s.closePath();
+    const g=new T.ExtrudeGeometry(s,{depth,bevelEnabled:true,bevelThickness:bevel,bevelSize:bevel,bevelSegments:2,curveSegments:2});g.translate(0,0,-depth/2);g.computeVertexNormals();
+    const m=new T.Mesh(g,rockMats[mat%rockMats.length]);m.position.z=z;m.castShadow=m.receiveShadow=true;world.add(m);return m;
   }
-  sg.computeVertexNormals();
-  const sand=new T.Mesh(sg,new T.MeshStandardMaterial({color:0xd9cfb5,roughness:1})); sand.rotation.x=-Math.PI/2; sand.position.y=-1.42; sand.receiveShadow=true; world.add(sand);
+  function blob(x,y,z,sx,sy,sz,seed,mat=0){
+    const g=new T.DodecahedronGeometry(1,2),p=g.attributes.position;for(let i=0;i<p.count;i++){const a=p.getX(i),b=p.getY(i),c=p.getZ(i);const n=1+.09*Math.sin(a*9+seed)+.06*Math.cos(b*13-seed)+.045*Math.sin(c*17+seed*.7);p.setXYZ(i,a*n,b*n,c*n)}g.computeVertexNormals();
+    const m=new T.Mesh(g,rockMats[mat%4]);m.position.set(x,y,z);m.scale.set(sx,sy,sz);m.rotation.set(seed*.07,seed*.11,seed*.04);m.castShadow=m.receiveShadow=true;world.add(m);return m;
+  }
+  function hole(x,y,z,sx,sy,rot=0){const m=new T.Mesh(new T.SphereGeometry(1,24,16),new T.MeshBasicMaterial({color:0x020507,transparent:true,opacity:.98}));m.position.set(x,y,z);m.scale.set(sx,sy,.06);m.rotation.z=rot;world.add(m)}
+  function pores(cx,cy,cz,rx,ry,n,seed){for(let i=0;i<n;i++){const a=(i*2.399+seed)%6.283,q=.25+.72*((i*37+seed*9)%100)/100;blob(cx+Math.cos(a)*rx*q,cy+Math.sin(a)*ry*q,cz+.03*Math.sin(i),.10+.08*((i*11)%7)/7,.07+.06*((i*13)%5)/5,.09+.06*((i*17)%6)/6,seed+i,i)}}
 
-  // Panel técnico posterior central conservado tras retirar el antiguo tabique completo.
-  const technical=new T.Mesh(new T.BoxGeometry(.63,2.58,.17),new T.MeshStandardMaterial({color:0x11171c,roughness:.86})); technical.position.set(.04,-.04,-1.45); world.add(technical);
+  // IZQUIERDA: silueta frontal trazada sobre tus fotos. Base ancha, gran hueco central bajo, plataforma horizontal intermedia y corona redondeada baja.
+  poly([[-3.00,-1.34],[-2.95,-1.02],[-2.70,-.92],[-2.62,-.58],[-2.42,-.46],[-2.42,-.28],[-2.78,-.18],[-2.96,-.04],[-2.95,.15],[-2.72,.27],[-2.47,.33],[-2.30,.42],[-2.04,.48],[-1.82,.55],[-1.58,.59],[-1.34,.56],[-1.10,.50],[-.92,.43],[-.69,.37],[-.49,.22],[-.40,.03],[-.24,-.02],[-.27,-.22],[-.45,-.31],[-.42,-.55],[-.28,-.69],[-.25,-.91],[-.39,-1.05],[-.65,-1.11],[-.82,-1.34]],1.16,-.30,0,.075);
+  // corte visual del arco inferior real
+  hole(-1.48,-1.05,.55,.53,.39,-.03);hole(-1.12,-.83,.56,.23,.19,-.08);
+  // gran repisa frontal que define el perfil real
+  poly([[-3.05,-.30],[-2.93,-.18],[-2.30,-.12],[-1.84,-.10],[-1.34,-.13],[-.86,-.16],[-.44,-.19],[-.32,-.30],[-.45,-.43],[-.98,-.45],[-1.48,-.42],[-2.02,-.41],[-2.60,-.43],[-2.93,-.40]],.64,.54,1,.045);
+  // corona de piedras grandes, no nube aleatoria
+  [[-2.49,.46,.02,.43,.28,.42,10],[-2.03,.58,-.04,.48,.30,.45,11],[-1.54,.65,-.08,.49,.31,.45,12],[-1.06,.59,-.04,.43,.29,.41,13],[-.66,.46,.00,.37,.25,.36,14],[-2.69,.25,.10,.33,.22,.31,15],[-1.79,.30,.15,.31,.22,.31,16],[-1.28,.31,.16,.31,.22,.30,17]].forEach(v=>blob(...v,2));
+  pores(-1.62,.38,.18,1.12,.34,16,60);
 
-  const rockMaterials=[
-    new T.MeshStandardMaterial({color:0x745b4f,roughness:.98}),
-    new T.MeshStandardMaterial({color:0x6d544b,roughness:.99}),
-    new T.MeshStandardMaterial({color:0x806459,roughness:.98}),
-    new T.MeshStandardMaterial({color:0x5f5149,roughness:1})
-  ];
-  function rock(x,y,z,sx,sy,sz,seed,detail=3){
-    const g=new T.IcosahedronGeometry(1,detail),p=g.attributes.position;
-    for(let i=0;i<p.count;i++){
-      const a=p.getX(i),b=p.getY(i),c=p.getZ(i);
-      const n=1+.105*Math.sin(a*8.7+seed)+.075*Math.cos(b*13.2-seed*.8)+.05*Math.sin(c*20.4+seed*1.4)+.03*Math.cos((a+b+c)*31+seed);
-      p.setXYZ(i,a*n,b*n,c*n);
+  // DERECHA: base abierta, plataforma frontal baja a la izquierda y torre posterior alta en el tercio derecho.
+  poly([[.40,-1.34],[.44,-1.10],[.63,-.94],[.72,-.70],[.60,-.56],[.44,-.46],[.41,-.26],[.60,-.13],[.91,-.13],[1.12,-.26],[1.35,-.28],[1.52,-.16],[1.65,.02],[1.66,.28],[1.78,.47],[1.94,.66],[2.03,.92],[2.20,1.14],[2.43,1.22],[2.62,1.08],[2.70,.85],[2.91,.75],[3.02,.54],[2.98,.30],[2.78,.10],[2.84,-.12],[3.02,-.29],[2.99,-.56],[2.78,-.75],[2.69,-1.03],[2.91,-1.20],[2.83,-1.34]],1.08,-.40,2,.075);
+  hole(2.17,-1.03,.55,.45,.34,.06);
+  // plataforma frontal real, baja y proyectada hacia el cristal
+  poly([[.48,-.67],[.66,-.56],[1.08,-.50],[1.50,-.52],[1.83,-.58],[1.90,-.70],[1.72,-.82],[1.24,-.84],[.81,-.82],[.52,-.77]],.72,.55,1,.045);
+  // saliente medio izquierdo visible en frontal
+  poly([[.48,-.13],[.58,.00],[.86,.08],[1.10,.07],[1.28,-.02],[1.25,-.17],[1.04,-.24],[.71,-.23]],.62,.35,0,.04);
+  [[1.56,.15,-.05,.40,.29,.38,30],[1.88,.43,-.10,.44,.34,.42,31],[2.18,.72,-.17,.42,.37,.39,32],[2.49,.92,-.23,.34,.31,.33,33],[2.68,.60,-.12,.31,.28,.31,34],[2.41,.32,.03,.40,.31,.38,35],[2.03,.12,.10,.39,.30,.37,36],[2.71,.08,.08,.31,.24,.30,37],[1.35,-.20,.16,.29,.22,.29,38]].forEach(v=>blob(...v,3));
+  pores(2.12,.43,.12,.72,.46,13,90);
+
+  const corMat=new T.MeshStandardMaterial({color:0x805d75,roughness:.98,transparent:true,opacity:.30});
+  [[-1.86,.70,.06,.23],[2.23,1.03,-.08,.18],[1.84,.55,.16,.16],[-2.55,.20,.42,.15]].forEach(v=>{const m=new T.Mesh(new T.SphereGeometry(1,16,10),corMat);m.position.set(v[0],v[1],v[2]);m.scale.set(v[3],.025,v[3]*.72);world.add(m)});
+
+  function pump(x,y,z,flip=false){const g=new T.Group(),d=new T.MeshStandardMaterial({color:0x10171a,roughness:.4,metalness:.2}),a=new T.MeshStandardMaterial({color:0x2d9bc9,roughness:.3});const s=new T.Mesh(new T.CylinderGeometry(.19,.19,.21,28),d);s.rotation.z=Math.PI/2;g.add(s);const h=new T.Mesh(new T.CylinderGeometry(.055,.055,.23,18),a);h.rotation.z=Math.PI/2;g.add(h);g.position.set(x,y,z);if(flip)g.rotation.y=Math.PI;world.add(g)}
+  pump(-3.02,.62,-.57);pump(-3.02,.62,.04);pump(3.02,.64,-.46,true);
+
+  function simpleFish(x,y,z,cm,color,phase,kind='generic'){
+    const L=cm*S,g=new T.Group();g.userData={home:new T.Vector3(x,y,z),phase,speed:.18+.03*phase};
+    const body=new T.Mesh(new T.SphereGeometry(1,32,20),new T.MeshStandardMaterial({color,roughness:.42}));body.scale.set(L*.48,L*(kind==='clown'?.23:.27),L*.13);g.add(body);
+    const tail=new T.Mesh(new T.ConeGeometry(L*.16,L*.27,3),new T.MeshStandardMaterial({color,roughness:.45,side:T.DoubleSide}));tail.rotation.z=-Math.PI/2;tail.position.x=-L*.56;g.add(tail);
+    if(kind==='clown'){
+      const w=new T.MeshStandardMaterial({color:0xf0eee7,roughness:.48}),b=new T.MeshStandardMaterial({color:0x161719,roughness:.48});
+      [.17,-.13].forEach(px=>{const o=new T.Mesh(new T.TorusGeometry(L*.112,L*.025,9,28),b);o.rotation.y=Math.PI/2;o.position.x=L*px;g.add(o);const q=new T.Mesh(new T.TorusGeometry(L*.112,L*.014,9,28),w);q.rotation.y=Math.PI/2;q.position.x=L*px;g.add(q)});
     }
-    g.computeVertexNormals();
-    const m=new T.Mesh(g,rockMaterials[Math.abs(seed)%rockMaterials.length]);
-    m.position.set(x,y,z);m.scale.set(sx,sy,sz);m.rotation.set(seed*.07,seed*.13,seed*.045);m.castShadow=m.receiveShadow=true;world.add(m);return m;
-  }
-  function shelf(x,y,z,w,d,t,seed){
-    const g=new T.BoxGeometry(w,t,d,10,3,8),p=g.attributes.position;
-    for(let i=0;i<p.count;i++){
-      const a=p.getX(i),b=p.getY(i),c=p.getZ(i);
-      p.setXYZ(i,a*(1+.045*Math.sin(c*7+seed)),b+.035*Math.sin(a*9+seed)+.018*Math.cos(c*13),c*(1+.05*Math.cos(a*6-seed)));
-    }
-    g.computeVertexNormals(); const m=new T.Mesh(g,rockMaterials[Math.abs(seed)%4]);
-    m.position.set(x,y,z);m.rotation.set(.015,seed*.022,.01);m.castShadow=m.receiveShadow=true;world.add(m);return m;
-  }
-  function voidMask(x,y,z,sx,sy,rot=0){
-    const m=new T.Mesh(new T.SphereGeometry(1,28,18),new T.MeshBasicMaterial({color:0x030708,transparent:true,opacity:.96}));
-    m.position.set(x,y,z);m.scale.set(sx,sy,.07);m.rotation.z=rot;world.add(m);
-  }
-  function pebbleCloud(cx,cy,cz,rx,ry,rz,count,seed){
-    for(let i=0;i<count;i++){
-      const a=(i*2.399+seed)%6.283, q=((i*37+seed*11)%100)/100;
-      rock(cx+Math.cos(a)*rx*q,cy+((i*17)%100)/100*ry,cz+Math.sin(a)*rz*q,.18+.09*((i*13)%7)/7,.12+.08*((i*19)%5)/5,.16+.08*((i*23)%6)/6,seed+i,2);
-    }
-  }
-
-  // ISLA IZQUIERDA — calibrada a partir de frontal, lateral izquierdo, superior y huecos observados.
-  rock(-2.58,-1.12,-.20,.62,.31,.62,1); rock(-2.02,-1.08,-.16,.66,.34,.67,2); rock(-1.42,-1.09,-.13,.66,.33,.65,3); rock(-.83,-1.10,-.12,.60,.32,.59,4); rock(-.38,-1.11,-.16,.40,.26,.45,5);
-  rock(-2.35,-.76,-.16,.57,.42,.58,6); rock(-.70,-.76,-.13,.52,.40,.54,7);
-  voidMask(-1.47,-.91,.66,.48,.34,.02); voidMask(-1.20,-.66,.67,.28,.18,-.08);
-  shelf(-1.55,-.38,.11,2.82,.83,.22,8); shelf(-.48,-.30,.16,.73,.63,.18,9);
-  rock(-2.25,.00,-.19,.63,.39,.59,10); rock(-1.70,.10,-.22,.68,.42,.63,11); rock(-1.10,.08,-.20,.66,.40,.61,12); rock(-.55,.02,-.18,.47,.35,.49,13);
-  rock(-2.08,.42,-.28,.52,.38,.52,14); rock(-1.56,.50,-.27,.56,.42,.55,15); rock(-1.03,.48,-.25,.53,.39,.52,16); rock(-.56,.36,-.21,.40,.31,.43,17);
-  shelf(-2.55,-.13,.61,1.35,.66,.16,18); shelf(-1.55,-.11,.63,1.03,.61,.15,19);
-  pebbleCloud(-1.48,.33,-.25,1.18,.44,.52,18,60);
-
-  // ISLA DERECHA — plataforma frontal baja, columna posterior alta, arco inferior derecho y saliente izquierdo.
-  rock(.53,-1.12,-.18,.52,.28,.55,30); rock(1.04,-1.11,-.18,.57,.31,.59,31); rock(1.58,-1.10,-.20,.59,.34,.62,32); rock(2.12,-1.10,-.21,.57,.34,.60,33); rock(2.50,-1.10,-.20,.38,.27,.47,34);
-  voidMask(1.80,-.91,.67,.42,.33,.03);
-  shelf(1.08,-.54,.18,1.76,.70,.19,35); rock(2.05,-.59,-.22,.60,.44,.59,36);
-  shelf(.82,-.08,.40,1.12,.66,.17,37); rock(1.48,-.09,-.30,.61,.43,.57,38); rock(2.02,-.10,-.31,.58,.44,.55,39);
-  rock(1.77,.33,-.42,.56,.47,.52,40); rock(2.12,.64,-.44,.43,.42,.43,41); rock(1.69,.73,-.44,.45,.45,.45,42); rock(2.02,1.00,-.47,.34,.35,.35,43);
-  shelf(.73,.26,.28,.88,.55,.15,44); pebbleCloud(1.76,.38,-.35,.76,.45,.45,13,90);
-
-  // Mancha de coralina visual muy discreta sobre parte alta de la roca.
-  const coraline=new T.MeshStandardMaterial({color:0x825f78,roughness:.96,transparent:true,opacity:.42});
-  [[-1.6,.58,-.02,.28],[-2.0,.27,.18,.20],[1.82,.76,-.18,.20],[1.36,.10,.20,.16]].forEach(v=>{
-    const m=new T.Mesh(new T.SphereGeometry(1,18,12),coraline);m.position.set(v[0],v[1],v[2]);m.scale.set(v[3],.035,v[3]*.75);world.add(m);
-  });
-
-  function pump(x,y,z,flip){
-    const g=new T.Group(),dark=new T.MeshStandardMaterial({color:0x10171a,roughness:.38,metalness:.25}),accent=new T.MeshStandardMaterial({color:0x2a9ecf,roughness:.3});
-    const shell=new T.Mesh(new T.CylinderGeometry(.20,.20,.22,30),dark);shell.rotation.z=Math.PI/2;g.add(shell);
-    const face=new T.Mesh(new T.TorusGeometry(.14,.025,8,28),dark);face.rotation.y=Math.PI/2;face.position.x=.12;g.add(face);
-    const hub=new T.Mesh(new T.CylinderGeometry(.055,.055,.25,18),accent);hub.rotation.z=Math.PI/2;g.add(hub);
-    g.position.set(x,y,z);if(flip)g.rotation.y=Math.PI;world.add(g);
-  }
-  pump(-3.03,.64,-.57,false);pump(-3.03,.64,.05,false);pump(3.03,.66,-.46,true);
-
-  function finMaterial(color,opacity=.78){return new T.MeshStandardMaterial({color,roughness:.52,transparent:true,opacity,side:T.DoubleSide});}
-  function fishBody(length,height,depth,color){
-    const g=new T.SphereGeometry(1,42,26);g.scale(length*.49,height*.50,depth*.50);return new T.Mesh(g,new T.MeshStandardMaterial({color,roughness:.42}));
-  }
-  function tailMesh(L,H,color){
-    const shape=new T.Shape();shape.moveTo(0,0);shape.lineTo(-L*.22,H*.36);shape.lineTo(-L*.12,0);shape.lineTo(-L*.22,-H*.36);shape.closePath();
-    const geo=new T.ShapeGeometry(shape);const m=new T.Mesh(geo,finMaterial(color));m.rotation.y=Math.PI/2;return m;
-  }
-  function clown(x,y,z,cm,dir,phase){
-    const L=cm*S,H=L*.46,D=L*.24,g=new T.Group();g.userData={phase,home:new T.Vector3(x,y,z),speed:.22+phase*.02,range:.22};
-    const orange=0xe46d1b,black=0x121416,white=0xf0eee7;
-    g.add(fishBody(L,H,D,orange));
-    const nose=new T.Mesh(new T.SphereGeometry(1,28,18),new T.MeshStandardMaterial({color:orange,roughness:.42}));nose.scale.set(L*.17,H*.38,D*.48);nose.position.x=L*.38;g.add(nose);
-    const tail=tailMesh(L,H,orange);tail.position.x=-L*.48;g.add(tail);
-    [[.18,.10],[-.12,.095]].forEach(([px,w])=>{
-      const b=new T.Mesh(new T.TorusGeometry(H*.48,w*L,10,34),new T.MeshStandardMaterial({color:black,roughness:.48}));b.rotation.y=Math.PI/2;b.position.x=px*L;g.add(b);
-      const q=new T.Mesh(new T.TorusGeometry(H*.48,w*L*.56,10,34),new T.MeshStandardMaterial({color:white,roughness:.50}));q.rotation.y=Math.PI/2;q.position.x=px*L;g.add(q);
-    });
-    const dorsal=new T.Mesh(new T.ConeGeometry(H*.18,L*.28,4),finMaterial(black,.70));dorsal.position.set(-L*.05,H*.52,0);dorsal.rotation.z=Math.PI;g.add(dorsal);
-    const eye=new T.Mesh(new T.SphereGeometry(L*.026,14,10),new T.MeshStandardMaterial({color:0x050505}));eye.position.set(L*.39,H*.13,D*.46);g.add(eye);
-    g.position.set(x,y,z);g.rotation.y=dir<0?Math.PI:0;world.add(g);return g;
-  }
-  function blueTang(x,y,z,cm,phase){
-    const L=cm*S,H=L*.58,D=L*.18,g=new T.Group();g.userData={phase,home:new T.Vector3(x,y,z),speed:.16,range:.46};
-    g.add(fishBody(L,H,D,0x1b63cf));
-    const black=new T.Mesh(new T.SphereGeometry(1,32,20),new T.MeshStandardMaterial({color:0x10151d,roughness:.46}));black.scale.set(L*.30,H*.28,D*.52);black.position.set(-L*.05,H*.05,0);g.add(black);
-    const tail=tailMesh(L,H,0xf2d53b);tail.position.x=-L*.49;g.add(tail);
-    const eye=new T.Mesh(new T.SphereGeometry(L*.022,14,10),new T.MeshStandardMaterial({color:0x050505}));eye.position.set(L*.40,H*.13,D*.45);g.add(eye);
     g.position.set(x,y,z);world.add(g);return g;
   }
-  function damsel(x,y,z,cm,phase){
-    const L=cm*S,H=L*.52,D=L*.20,g=new T.Group();g.userData={phase,home:new T.Vector3(x,y,z),speed:.28,range:.34};
-    g.add(fishBody(L,H,D,0x245fc9));const tail=tailMesh(L,H,0xf2d23a);tail.position.x=-L*.48;g.add(tail);
-    g.position.set(x,y,z);world.add(g);return g;
-  }
+  const fish=[simpleFish(-2.48,.32,.57,6.2,0xe76b1c,.2,'clown'),simpleFish(-2.13,.08,.28,5.2,0xe76b1c,1.1,'clown'),simpleFish(2.20,-.50,.10,8.5,0x2456d8,1.9),simpleFish(1.12,.46,-.05,6.5,0x2e4bb8,2.7)];
 
-  // Habitantes actuales registrados. Tamaños visuales son aproximaciones deliberadas, no mediciones clínicas.
-  const swimmers=[
-    clown(-2.52,.52,.45,6.0,1,.2), clown(-2.18,.24,.12,5.0,1,1.4),
-    blueTang(.72,.30,.04,9.0,2.6), damsel(1.55,.58,-.10,4.5,4.0)
-  ];
+  const views={front:[0,.08,9.35],left:[-8.0,.12,1.8],right:[8.0,.12,1.8],top:[0,8.4,.22],free:[4.7,3.0,6.3]};
+  $$('[data-aqview]').forEach(btn=>btn.addEventListener('click',()=>{$$('[data-aqview]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const v=views[btn.dataset.aqview]||views.front;camera.position.set(...v);camera.lookAt(0,-.08,0)}));camera.lookAt(0,-.08,0);
+  let drag=false,px=0,py=0,yaw=0,pitch=0;renderer.domElement.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;renderer.domElement.setPointerCapture?.(e.pointerId)});renderer.domElement.addEventListener('pointermove',e=>{if(!drag)return;yaw+=(e.clientX-px)*.004;pitch=Math.max(-.30,Math.min(.30,pitch+(e.clientY-py)*.003));px=e.clientX;py=e.clientY;world.rotation.y=yaw;world.rotation.x=pitch});renderer.domElement.addEventListener('pointerup',()=>drag=false);
 
-  const overlay=document.createElement('div');overlay.className='aq20-overlay';
-  overlay.innerHTML=`<div class="aq20-badge"><b>v${V}</b><span>82 × 40 × 39 cm</span></div><div class="aq20-scale"><i></i><b>10 cm</b><small>escala física</small></div>`;host.appendChild(overlay);
+  const badge=document.createElement('div');badge.className='aq19-calibration';badge.innerHTML='<b>V2.1 · SILUETA TRAZADA</b><span>82 × 40 × 39 cm</span>';host.appendChild(badge);
+  const note=document.createElement('div');note.className='aq19-scale';note.innerHTML='<span></span><b>10 cm reales</b><small>rocas = forma fija · peces ≈ escala real</small>';host.appendChild(note);
 
-  const legend=document.createElement('div');legend.className='aq20-legend';
-  legend.innerHTML='<b>Habitantes representados</b><span>2 Ocellaris · Cirujano azul · Damisela</span><small>Los tamaños de peces son estimaciones visuales; la roca y la urna son la referencia fija.</small>';
-  host.appendChild(legend);
-
-  const views={front:[0,.15,9.25],left:[-8.0,.15,1.8],right:[8.0,.15,1.8],top:[0,8.0,.18],free:[4.7,2.9,6.0]};
-  function setView(name){const v=views[name]||views.front;camera.position.set(...v);camera.lookAt(0,-.08,0);world.rotation.set(0,0,0);$$('[data-aqview]').forEach(b=>b.classList.toggle('active',b.dataset.aqview===name));}
-  $$('[data-aqview]').forEach(btn=>btn.addEventListener('click',()=>setView(btn.dataset.aqview)));
-  setView('front');
-
-  let dragging=false,lastX=0,lastY=0;
-  renderer.domElement.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;renderer.domElement.setPointerCapture?.(e.pointerId)});
-  renderer.domElement.addEventListener('pointermove',e=>{if(!dragging)return;world.rotation.y+=(e.clientX-lastX)*.0038;world.rotation.x=Math.max(-.28,Math.min(.28,world.rotation.x+(e.clientY-lastY)*.0028));lastX=e.clientX;lastY=e.clientY});
-  renderer.domElement.addEventListener('pointerup',()=>dragging=false);
-  renderer.domElement.addEventListener('pointercancel',()=>dragging=false);
-
-  const clock=new T.Clock(); let raf=0;
-  function animate(){
-    if(!document.body.contains(host)){cancelAnimationFrame(raf);renderer.dispose();return;}
-    const t=clock.getElapsedTime();
-    swimmers.forEach((f,i)=>{
-      const u=f.userData,tt=t*u.speed+u.phase;
-      f.position.x=u.home.x+Math.sin(tt*1.7)*u.range;
-      f.position.y=u.home.y+Math.sin(tt*2.3+i)*.045;
-      f.position.z=u.home.z+Math.cos(tt*1.2)*u.range*.36;
-      const dx=Math.cos(tt*1.7);f.rotation.y=dx<0?Math.PI:0;
-      f.rotation.z=Math.sin(tt*2.0)*.025;
-    });
-    renderer.render(scene,camera);raf=requestAnimationFrame(animate);
-  }
-  animate();
-
-  const ro=new ResizeObserver(()=>{if(!document.body.contains(host))return;const w=Math.max(320,host.clientWidth),h=Math.max(470,Math.round(w*.74));camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h)});ro.observe(host);
+  const clock=new T.Clock();let raf=0;function animate(){raf=requestAnimationFrame(animate);const t=clock.getElapsedTime();fish.forEach((f,i)=>{f.position.x=f.userData.home.x+Math.sin(t*f.userData.speed+f.userData.phase)*.14;f.position.y=f.userData.home.y+Math.sin(t*.55+f.userData.phase)*.045;f.rotation.y=Math.sin(t*.22+i)*.12});renderer.render(scene,camera)}animate();
+  const ro=new ResizeObserver(()=>{if(!document.body.contains(host)){cancelAnimationFrame(raf);ro.disconnect();return}const nw=Math.max(320,host.clientWidth),nh=Math.max(470,Math.round(nw*.74));camera.aspect=nw/nh;camera.updateProjectionMatrix();renderer.setSize(nw,nh,false)});ro.observe(host);
 }
 
-new MutationObserver(()=>boot()).observe(document.body,{childList:true,subtree:true});
-window.addEventListener('DOMContentLoaded',boot);setTimeout(boot,120);setTimeout(boot,700);
+document.addEventListener('click',e=>{if(e.target.closest('[data-view="twin"]'))setTimeout(boot,70)});
+const mo=new MutationObserver(()=>{if($('#myAquarium3d'))boot()});mo.observe(document.body,{childList:true,subtree:true});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
