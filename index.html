@@ -16,12 +16,13 @@
   <link rel="stylesheet" href="installations.css" />
   <link rel="stylesheet" href="director.css" />
   <link rel="stylesheet" href="sourcing.css" />
+  <link rel="stylesheet" href="virtual-reef.css" />
 </head>
 <body>
   <div class="app-shell">
     <header class="topbar"><div><p class="eyebrow">ACUARIO AI</p><h1>Fluval Flex Marine 123</h1></div><button id="healthButton" class="health-chip" type="button"><span class="health-dot"></span><span id="healthLabel">Evaluando</span></button></header>
     <main id="mainContent" class="content" aria-live="polite"></main>
-    <nav class="bottom-nav" aria-label="Navegación principal"><button class="nav-item active" data-view="home"><span>⌂</span><small>Inicio</small></button><button class="nav-item" data-view="livestock"><span>◉</span><small>Vida</small></button><button class="nav-item" data-view="parameters"><span>⌁</span><small>Agua</small></button><button class="nav-item" data-view="equipment"><span>⚙</span><small>Equipo</small></button><button class="nav-item" data-view="advisor"><span>✦</span><small>IA</small></button></nav>
+    <nav class="bottom-nav" aria-label="Navegación principal"><button class="nav-item active" data-view="home"><span>⌂</span><small>Inicio</small></button><button class="nav-item" data-view="livestock"><span>◉</span><small>Vida</small></button><button class="nav-item" data-view="parameters"><span>⌁</span><small>Agua</small></button><button class="nav-item" data-view="equipment"><span>⚙</span><small>Equipo</small></button><button class="nav-item" data-view="twin"><span>▱</span><small>Gemelo</small></button><button class="nav-item" data-view="advisor"><span>✦</span><small>IA</small></button></nav>
   </div>
   <dialog id="measurementDialog" class="sheet"><form id="measurementForm" method="dialog"><div class="sheet-head"><div><p class="eyebrow">NUEVA MEDICIÓN</p><h2>Registrar parámetro</h2></div><button type="button" class="icon-btn" data-close="measurementDialog">×</button></div><label>Parámetro<select id="measurementType" required></select></label><label>Valor<input id="measurementValue" inputmode="decimal" type="number" step="any" required /></label><label>Nota<input id="measurementNote" type="text" placeholder="Opcional" /></label><button class="primary" type="submit">Guardar medición</button></form></dialog>
   <dialog id="maintenanceDialog" class="sheet"><form id="maintenanceForm" method="dialog"><div class="sheet-head"><div><p class="eyebrow">MANTENIMIENTO</p><h2>Registrar acción</h2></div><button type="button" class="icon-btn" data-close="maintenanceDialog">×</button></div><label>Acción<select id="maintenanceType" required><option value="Cambio de agua">Cambio de agua</option><option value="Sifonado parcial">Sifonado parcial</option><option value="Limpieza prefiltro EHEIM">Limpieza prefiltro EHEIM</option><option value="Limpieza cristal">Limpieza cristal</option><option value="Limpieza bomba">Limpieza bomba</option><option value="Revisión skimmer">Revisión skimmer</option><option value="Otro">Otro</option></select></label><label>Detalle<input id="maintenanceDetail" type="text" placeholder="Ej.: 10 L + zona derecha" /></label><button class="primary" type="submit">Guardar mantenimiento</button></form></dialog>
@@ -36,5 +37,6 @@
   <script src="installations.js" defer></script>
   <script src="director.js" defer></script>
   <script src="sourcing.js" defer></script>
+  <script src="virtual-reef.js" defer></script>
 </body>
 </html>
