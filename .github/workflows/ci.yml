@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate JavaScript
         run: |
-          for f in app.js enhancements.js individuals.js experts.js catalog-v07.js commerce.js budget.js installations.js director.js sourcing.js virtual-reef.js candidate-lab.js water-intelligence.js proposals.js market-intelligence.js sw.js; do node --check "$f"; done
+          for f in app.js enhancements.js individuals.js experts.js catalog-v07.js commerce.js budget.js installations.js director.js sourcing.js virtual-reef.js candidate-lab.js water-intelligence.js proposals.js market-intelligence.js recovery-v16.js sw.js; do node --check "$f"; done
       - name: Validate JSON
         run: |
           python -m json.tool data/aquarium.json >/dev/null
@@ -29,4 +29,4 @@ jobs:
           NODE
       - name: Verify required files
         run: |
-          for f in index.html styles.css sw.js director.js installations.js commerce.js sourcing.js virtual-reef.js virtual-reef.css candidate-lab.js candidate-lab.css water-intelligence.js proposals.js market-intelligence.js; do test -f "$f"; done
+          for f in index.html styles.css sw.js director.js installations.js commerce.js sourcing.js virtual-reef.js virtual-reef.css candidate-lab.js candidate-lab.css water-intelligence.js proposals.js market-intelligence.js recovery-v16.js; do test -f "$f"; done
