@@ -1,7 +1,15 @@
 {
   "aquarium": {
-    "name": "Reef 130 L",
-    "volumeLiters": 130,
+    "name": "Fluval Flex Marine 123 L",
+    "model": "Fluval Flex Marine 123 L",
+    "modelNumber": "14994",
+    "modelConfidence": 0.98,
+    "nominalCapacityLiters": 123,
+    "externalDimensionsCm": {"length":82,"depth":40,"height":39},
+    "externalBoundingBoxLiters": 127.92,
+    "volumeLiters": 123,
+    "operationalWaterEstimateLiters": {"min":100,"max":110,"status":"estimate-only"},
+    "volumeNote": "Los 127,92 L son solo el paralelepípedo externo 82×40×39 cm. Fluval declara 123 L de capacidad. Haber retirado el tabique/filtro trasero aumenta el espacio útil visual y elimina desplazamiento interno, pero no aumenta el volumen geométrico del vaso. Con roca, arena y nivel real de agua, el volumen de agua circulante se estima provisionalmente en 100–110 L y no debe usarse para dosificación precisa hasta calibrarlo por cambio de agua medido.",
     "type": "marine",
     "location": "Sevilla 41020",
     "status": "baseline",
@@ -86,7 +94,7 @@
     {"id":"filter-eheim","category":"filtration","name":"EHEIM Professionel 4+ 250","status":"working","confidence":1,"notes":"Filtro externo confirmado por pedido y fotografía."},
     {"id":"flow-nero5","category":"flow","name":"AI Nero 5","status":"working","confidence":1,"notes":"Programación visible en app AI; captura muestra perfil Random y referencia de 30%."},
     {"id":"skimmer-tunze","category":"skimmer","name":"Tunze Comline DOC Skimmer","model":"Probable 9004","status":"broken","confidence":0.72,"notes":"Modelo no confirmado aún por etiqueta. No sustituir antes de diagnosticar bomba, rotor, entrada de aire y obstrucciones."},
-    {"id":"light-fluval","category":"lighting","name":"Fluval Marine LED","status":"working","confidence":0.95,"notes":"Instalada dentro de la tapa. El ciclo exacto se conserva como dato derivado de captura hasta confirmar puntos/porcentajes manualmente."},
+    {"id":"light-fluval","category":"lighting","name":"Fluval Marine 3.0 LED para Flex Marine 123 L","model":"Luminaria incluida en Fluval Flex Marine 123 L; referencia de recambio 14513","status":"working","confidence":0.98,"notes":"El pack marino 14994 incluye Marine 3.0 controlada por FluvalSmart. En documentación europea del pack aparece una potencia total de 42 W; confirmar etiqueta/fuente para fijar la revisión exacta de hardware."},
     {"id":"topoff-reservoir","category":"topoff","name":"Sistema de reposición automática + depósito ~20 L","status":"broken","confidence":0.45,"notes":"Depósito lateral y tuberías visibles. Marca/modelo pendientes de identificar. El sistema dejó de funcionar."},
     {"id":"salinity-hanna","category":"test","name":"Hanna Marine Salinity Tester","status":"working","confidence":1,"notes":"Medidor digital de salinidad confirmado visualmente."},
     {"id":"phosphate-hanna","category":"test","name":"Hanna Checker Marine Phosphate ULR","status":"working","confidence":1,"notes":"Checker confirmado visualmente."},
@@ -111,7 +119,7 @@
   ],
   "automation": {
     "nero5": {"mode":"Random","referencePercent":30,"source":"owner screenshot","exactScheduleConfirmed":false},
-    "lighting": {"fixture":"Fluval Marine","source":"owner screenshot","exactPointsConfirmed":false,"observed":"Programa diurno aproximado 10:00–22:00; canal morado aparece al 100%, blanco frío alrededor de 20% y rosa alrededor de 10% en la captura. Confirmar valores antes de usar para recomendaciones de coral."}
+    "lighting": {"fixture":"Fluval Marine 3.0 para Flex Marine 123 L","fixtureConfidence":0.98,"source":"owner screenshot + Fluval model match","exactPointsConfirmed":false,"observed":"Programa diurno aproximado 10:00–22:00; canal morado aparece al 100%, blanco frío alrededor de 20% y rosa alrededor de 10% en la captura. Confirmar valores antes de usar para recomendaciones de coral."}
   },
   "risks": [
     {"priority":1,"title":"Temperatura estival","severity":"high","reason":"El propietario reporta sobretemperatura en verano y la luminaria está dentro de la tapa."},
