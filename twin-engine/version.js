@@ -3,7 +3,7 @@
  * BUILD_SHA is rewritten by CI (see TWIN_ENGINE.md → "Inyección de SHA").
  * If you ever see "dev-local" in the badge on GitHub Pages, CI did not run.
  */
-export const TWIN_ENGINE_VERSION = '0.5.2';
+export const TWIN_ENGINE_VERSION = '0.5.3';
 export const BUILD_SHA = '__BUILD_SHA__';
 export const BUILD_TIME = '__BUILD_TIME__';
 
