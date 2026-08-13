@@ -1,0 +1,48 @@
+{
+  "version": 42,
+  "equipment": {
+    "filter-eheim": {
+      "title": "EHEIM Professionel 4+ 250",
+      "canvas": {"width": 320, "height": 420},
+      "parts": [
+        {"id":"hose-block","label":"Bloque de mangueras","shape":"rect","x":105,"y":18,"w":110,"h":38},
+        {"id":"head","label":"Cabezal / motor","shape":"rect","x":65,"y":60,"w":190,"h":58},
+        {"id":"prefilter","label":"PREFILTRO","shape":"rect","x":82,"y":126,"w":156,"h":62},
+        {"id":"basket-1","label":"Cesta biológica 1","shape":"rect","x":82,"y":196,"w":156,"h":62},
+        {"id":"basket-2","label":"Cesta biológica 2","shape":"rect","x":82,"y":266,"w":156,"h":62},
+        {"id":"canister","label":"Cuba","shape":"rect","x":50,"y":118,"w":220,"h":232},
+        {"id":"impeller","label":"Rotor / impulsor","shape":"circle","cx":160,"cy":88,"r":18}
+      ],
+      "steps": [
+        {"step":1,"focus":["hose-block","head"],"caption":"Desconecta el filtro y trabaja con las manos secas antes de tocar mangueras o cabezal."},
+        {"step":2,"focus":["hose-block"],"caption":"Cierra y desacopla el bloque de mangueras. Esta es la pieza que debes separar antes de mover el filtro."},
+        {"step":3,"focus":["head","canister"],"caption":"Abre los cierres y retira el cabezal sin forzar. Fotografía el orden interior antes de sacar cestas."},
+        {"step":4,"focus":["prefilter"],"caption":"ESTE es el prefiltro. Retíralo primero y elimina la suciedad mecánica acumulada."},
+        {"step":5,"focus":["basket-1","basket-2"],"caption":"Mantén húmedo el material biológico. Si está colmatado, acláralo suavemente con agua retirada del acuario."},
+        {"step":6,"focus":["impeller","head"],"caption":"Revisa rotor, eje y cámara del impulsor. No fuerces el eje ni uses herramientas que puedan dañarlo."},
+        {"step":7,"focus":["basket-2","basket-1","prefilter","head"],"caption":"Vuelve a montar respetando exactamente el orden: cestas, prefiltro y cabezal."},
+        {"step":8,"focus":["hose-block"],"caption":"Reconecta mangueras, abre el adaptador, ceba y comprueba fugas, ruido y caudal durante los primeros minutos."}
+      ]
+    },
+    "flow-nero5": {
+      "title":"AI Nero 5",
+      "canvas":{"width":320,"height":260},
+      "parts":[
+        {"id":"wet-side","label":"Parte húmeda","shape":"circle","cx":115,"cy":125,"r":55},
+        {"id":"guard","label":"Protector","shape":"circle","cx":115,"cy":125,"r":46},
+        {"id":"rotor","label":"Rotor","shape":"circle","cx":115,"cy":125,"r":22},
+        {"id":"dry-magnet","label":"Imán exterior","shape":"rect","x":205,"y":78,"w":48,"h":94}
+      ],
+      "steps":[
+        {"step":1,"focus":["wet-side","dry-magnet"],"caption":"Desconecta antes de separar la bomba del cristal."},
+        {"step":2,"focus":["wet-side"],"caption":"Fotografía altura y orientación antes de moverla."},
+        {"step":3,"focus":["wet-side","dry-magnet"],"caption":"Separa parte húmeda e imán exterior con cuidado."},
+        {"step":4,"focus":["guard","rotor"],"caption":"Retira protector y rotor para limpiar algas e incrustaciones."},
+        {"step":5,"focus":["rotor"],"caption":"Inspecciona rotor y eje. Si roza o está dañado, no lo fuerces."},
+        {"step":6,"focus":["rotor","guard"],"caption":"Monta y comprueba que el rotor gira libremente."},
+        {"step":7,"focus":["wet-side","dry-magnet"],"caption":"Reinstala en la posición marcada y orienta hacia zona libre."},
+        {"step":8,"focus":["wet-side"],"caption":"Arranca con la programación guardada y comprueba ruido, vibración y movimiento de arena."}
+      ]
+    }
+  }
+}
