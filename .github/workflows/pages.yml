@@ -23,6 +23,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Seal Twin build
+        run: |
+          BUILD_ID="0.5.0-${GITHUB_SHA::7}"
+          BUILD_TIME="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          grep -rl '__BUILD_SHA__\|__BUILD_ID__\|__BUILD_TIME__' . \
+            --include='*.js' --include='*.html' --include='*.json' \
+            | xargs -r sed -i \
+              -e "s/__BUILD_SHA__/${GITHUB_SHA}/g" \
+              -e "s/__BUILD_ID__/${BUILD_ID}/g" \
+              -e "s/__BUILD_TIME__/${BUILD_TIME}/g"
+          echo "BUILD_ID=$BUILD_ID"
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
