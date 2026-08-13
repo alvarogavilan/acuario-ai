@@ -14,8 +14,7 @@
     "channel":{"xMin":1.5,"xMax":5.5},
     "condition":{"coralline":0.18,"greenAlgae":0.42,"detritus":0.30,"cleanZonesY":16.0,"palette":{"rockBase":"#8a7358","rockOchre":"#b09a6e","rockPurple":"#7d5a6b","corallinePink":"#a86f84","algaeGreen":"#79864a","detritusDark":"#453b2c"}}
   },
-  "livestock":[{"id":"ocellaris-1","species":"Amphiprion ocellaris","lengthCm":6.5,"personality":{"boldness":0.75,"cruise":1.0,"homeX":-6,"homeY":20,"homeZ":2}},{"id":"ocellaris-2","species":"Amphiprion ocellaris","lengthCm":5.5,"personality":{"boldness":0.45,"cruise":0.85,"homeX":-3,"homeY":18,"homeZ":4}}],
-  "pendingSpecies":[{"species":"Paracanthurus hepatus","count":1,"observedLengthCm":8},{"species":"Chrysiptera cf. parasema","count":1,"observedLengthCm":5}],
+  "livestock":[{"id":"ocellaris-1","species":"Amphiprion ocellaris","lengthCm":6.5,"personality":{"boldness":0.75,"cruise":1.0,"homeX":-6,"homeY":20,"homeZ":2}},{"id":"ocellaris-2","species":"Amphiprion ocellaris","lengthCm":5.5,"personality":{"boldness":0.45,"cruise":0.85,"homeX":-3,"homeY":18,"homeZ":4}},{"id":"blue-tang-1","species":"Paracanthurus hepatus","lengthCm":8,"confidence":0.99,"$comment":"Vivo en el acuario real (ver data/aquarium.json). Sin renderer 3D todavía: se registra sin geometría, nunca con el modelo del ocellaris.","personality":{"boldness":0.5,"cruise":1.1,"homeX":18,"homeY":16,"homeZ":-2}},{"id":"blue-yellow-1","species":"Chrysiptera parasema","lengthCm":5,"confidence":0.88,"$comment":"Identificación visual probable (cf. parasema); vivo en el acuario real. Sin renderer 3D todavía.","personality":{"boldness":0.4,"cruise":0.8,"homeX":-15,"homeY":15,"homeZ":3}}],
   "corals":[],
   "equipment":[{"id":"wavemaker-1","type":"wavemaker","position":[33,22,-9],"rotation":[0,-0.5,0]},{"id":"wavemaker-2","type":"wavemaker","position":[34,14,-6],"rotation":[0,-0.7,0]}]
 }
