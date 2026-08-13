@@ -1,5 +1,5 @@
 (()=>{'use strict';
-const BUILD_ID='__BUILD_ID__';
+const BUILD_ID='twin-0.5.2-iosfix-20260813';
 let active=null,seq=0;
 const $=(s,r=document)=>r.querySelector(s);
 async function mount(){
