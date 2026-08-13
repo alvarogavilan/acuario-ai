@@ -16,9 +16,16 @@ export const RENDER_STATUS = Object.freeze({
 });
 
 const REGISTRY = {
+  // Segunda pasada de geometría/shader (perfil de cabeza, pedúnculo, bandas,
+  // pareja) — sigue PRODUCTION porque es una mejora sobre un renderer que
+  // ya se consideraba terminado, no un renderer nuevo sin validar.
   'Amphiprion ocellaris': RENDER_STATUS.PRODUCTION,
-  'Paracanthurus hepatus': RENDER_STATUS.NOT_AVAILABLE,
-  'Chrysiptera parasema': RENDER_STATUS.NOT_AVAILABLE,
+  // Renderers propios nuevos, sin validación visual real todavía (no hay
+  // forma de renderizar y comparar contra foto en este entorno). BETA
+  // hasta que se confirme en dispositivo real que la anatomía/color leen
+  // bien y no PRODUCTION solo porque el código compila.
+  'Paracanthurus hepatus': RENDER_STATUS.BETA,
+  'Chrysiptera parasema': RENDER_STATUS.BETA,
 };
 
 export function speciesRenderStatus(species) {

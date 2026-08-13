@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate JavaScript
         run: |
-          for f in app.js enhancements.js individuals.js experts.js catalog-v07.js commerce.js budget.js installations.js director.js sourcing.js virtual-reef.js candidate-lab.js water-intelligence.js proposals.js market-intelligence.js recovery-v16.js refinement-v17.js my-aquarium-v18.js my-aquarium-v19.js my-aquarium-v35.js sw.js twin-engine/version.js twin-engine/geometry-hull.js twin-engine/tank.js twin-engine/aquascape.js twin-engine/fauna.js twin-engine/engine.js twin-engine/species-registry.js; do node --check "$f"; done
+          for f in app.js enhancements.js individuals.js experts.js catalog-v07.js commerce.js budget.js installations.js director.js sourcing.js virtual-reef.js candidate-lab.js water-intelligence.js proposals.js market-intelligence.js recovery-v16.js refinement-v17.js my-aquarium-v18.js my-aquarium-v19.js my-aquarium-v35.js sw.js twin-engine/version.js twin-engine/geometry-hull.js twin-engine/tank.js twin-engine/aquascape.js twin-engine/fauna.js twin-engine/fauna-common.js twin-engine/fauna-ocellaris.js twin-engine/fauna-hepatus.js twin-engine/fauna-parasema.js twin-engine/engine.js twin-engine/species-registry.js twin-engine/debug.js twin-engine/validate-aquascape.js; do node --check "$f"; done
       - name: Validate JSON
         run: |
           python -m json.tool data/aquarium.json >/dev/null
@@ -42,9 +42,18 @@ jobs:
           const twinSpecies=new Set(twin.livestock.map(f=>f.species));
           for(const sp of aliveFish) if(!twinSpecies.has(sp)) throw new Error(`Pez vivo real sin entrada en el manifiesto Twin: ${sp}`);
           const registrySrc=fs.readFileSync('twin-engine/species-registry.js','utf8');
-          const registryKeys=[...registrySrc.matchAll(/'([^']+)':\s*RENDER_STATUS\./g)].map(m=>m[1]);
+          const registryEntries=[...registrySrc.matchAll(/'([^']+)':\s*RENDER_STATUS\.(\w+)/g)];
+          const registryKeys=registryEntries.map(m=>m[1]);
           for(const f of twin.livestock) if(!registryKeys.includes(f.species)) throw new Error(`Especie del manifiesto sin entrada en species-registry.js: ${f.species}`);
+          const faunaSrc=fs.readFileSync('twin-engine/fauna.js','utf8');
+          const rendererKeys=[...faunaSrc.matchAll(/'([^']+)':\s*create\w+/g)].map(m=>m[1]);
+          for(const [species,status] of registryEntries){
+            const hasRenderer=status==='PRODUCTION'||status==='BETA';
+            if(hasRenderer&&!rendererKeys.includes(species)) throw new Error(`"${species}" está en species-registry.js como ${status} pero no tiene fábrica en RENDERERS (fauna.js) — addFish() fallaría en runtime.`);
+          }
           NODE
+      - name: Validate aquascape geometric plausibility
+        run: node twin-engine/validate-aquascape.js
       - name: Verify required files
         run: |
-          for f in index.html styles.css sw.js director.js installations.js commerce.js sourcing.js virtual-reef.js virtual-reef.css candidate-lab.js candidate-lab.css water-intelligence.js proposals.js market-intelligence.js recovery-v16.js refinement-v17.js my-aquarium-v35.js twin-engine/version.js twin-engine/geometry-hull.js twin-engine/tank.js twin-engine/aquascape.js twin-engine/fauna.js twin-engine/engine.js twin-engine/species-registry.js twin-engine/aquascape.manifest.json; do test -f "$f"; done
+          for f in index.html styles.css sw.js director.js installations.js commerce.js sourcing.js virtual-reef.js virtual-reef.css candidate-lab.js candidate-lab.css water-intelligence.js proposals.js market-intelligence.js recovery-v16.js refinement-v17.js my-aquarium-v35.js my-aquarium-v20.css twin-engine/version.js twin-engine/geometry-hull.js twin-engine/tank.js twin-engine/aquascape.js twin-engine/fauna.js twin-engine/fauna-common.js twin-engine/fauna-ocellaris.js twin-engine/fauna-hepatus.js twin-engine/fauna-parasema.js twin-engine/engine.js twin-engine/species-registry.js twin-engine/debug.js twin-engine/validate-aquascape.js twin-engine/aquascape.manifest.json; do test -f "$f"; done
