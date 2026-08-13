@@ -1,5 +1,13 @@
-const CACHE='acuario-ai-v3.5.0';
-const ASSETS=['./','index.html','styles.css','experts.css','catalog-v07.css','commerce.css','installations.css','director.css','sourcing.css','virtual-reef.css','candidate-lab.css','my-aquarium-v20.css','my-aquarium-v22.css','app.js','enhancements.js','individuals.js','experts.js','catalog-v07.js','commerce.js','budget.js','installations.js','rear-safety-v28.js','director.js','sourcing.js','virtual-reef.js','candidate-lab.js','water-intelligence.js','water-change-plan-v27.js','proposals.js','market-intelligence.js','recovery-v16.js','refinement-v17.js','stabilization-v28.js','recovery-roadmap-v29.js','budget-first-v30.js','aquarium-placement-v26.js','my-aquarium-v35.js','manifest.webmanifest','data/aquarium.json'];
-self.addEventListener('install',event=>{self.skipWaiting();event.waitUntil(caches.open(CACHE).then(async c=>{for(const asset of ASSETS){try{await c.add(new Request(asset,{cache:'reload'}))}catch(e){console.warn('cache-skip',asset)}}}))});
-self.addEventListener('activate',event=>event.waitUntil(Promise.all([self.clients.claim(),caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))])));
-self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;const isNavigation=event.request.mode==='navigate';event.respondWith(fetch(event.request,{cache:'no-store'}).then(r=>{if(r&&r.ok){const copy=r.clone();caches.open(CACHE).then(c=>c.put(event.request,copy))}return r}).catch(()=>caches.match(event.request).then(r=>r||(isNavigation?caches.match('./'):undefined))))});
+/**
+ * sw.js — Twin Engine 0.5.0
+ * Build-stamped cache. HTML/JS/JSON are network-first so Safari does not
+ * silently keep an obsolete renderer after GitHub Pages deploys a new build.
+ */
+const BUILD_ID = '__BUILD_ID__';
+const CACHE = `acuario-ai-${BUILD_ID}`;
+const PRECACHE = ['./','./index.html','./manifest.webmanifest'];
+self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(c=>c.addAll(PRECACHE.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()))});
+self.addEventListener('activate',event=>{event.waitUntil((async()=>{const names=await caches.keys();await Promise.all(names.filter(n=>n!==CACHE).map(n=>caches.delete(n)));await self.clients.claim();const clients=await self.clients.matchAll({type:'window'});for(const c of clients)c.postMessage({type:'TWIN_BUILD',build:BUILD_ID})})())});
+const isFresh=url=>url.pathname.endsWith('.js')||url.pathname.endsWith('.json')||url.pathname.endsWith('.webmanifest');
+self.addEventListener('fetch',event=>{const req=event.request;if(req.method!=='GET')return;const url=new URL(req.url);if(url.origin!==self.location.origin)return;if(req.mode==='navigate'||isFresh(url)){event.respondWith((async()=>{try{const net=await fetch(req,{cache:'no-store'});const cache=await caches.open(CACHE);cache.put(req,net.clone());return net}catch(e){return(await caches.match(req))||Response.error()}})());return}event.respondWith((async()=>{const cache=await caches.open(CACHE),hit=await cache.match(req),net=fetch(req).then(r=>{cache.put(req,r.clone());return r}).catch(()=>hit);return hit||net})())});
+self.addEventListener('message',e=>{if(e.data==='SKIP_WAITING')self.skipWaiting()});
