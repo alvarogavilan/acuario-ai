@@ -1,0 +1,21 @@
+{
+  "$comment": "UNIDADES EN CENTÍMETROS. Origen (0,0,0) = centro de la huella, y=0 en el cristal inferior interior. +x derecha, +y arriba, +z hacia el observador.",
+  "schemaVersion": 2,
+  "tank": {"model":"Fluval Flex 123 (32.5 US gal)","volumeL":123,"outerWidth":82.0,"outerDepth":40.0,"outerHeight":39.0,"glassThickness":0.6,"frontEdgeZ":8.0,"frontBow":12.0,"rearChamberDepth":7.0,"rimHeight":2.2,"waterLevel":34.0,"measured":false},
+  "sand": {"baseLevel":3.2,"backLevel":5.0,"duneAmplitude":0.7,"color":"#d8d3c2","detritusTint":"#9a9270","detritusAmount":0.22},
+  "scape": {
+    "source":"photo-estimate","provisional":true,
+    "$comment_confianza":"Geometría deducida de las fotos aportadas, no de un trazado ortogonal calibrado. Composición y alturas relativas son una aproximación; cotas absolutas conservan margen aproximado ±2-3 cm.",
+    "tracedFrom":["IMG_2583.jpeg","IMG_2663.jpeg","IMG_2664.jpeg","IMG_2670.jpeg"],
+    "islands":[
+      {"id":"isla-izquierda","kind":"horizontal-shelf","voxelSize":0.75,"erosion":{"ridgeScale":0.055,"ridgeAmp":1.2,"poreScale":0.42,"poreAmp":0.34},"silhouettes":{"front":[[-36.5,0],[1.5,0],[1.5,6.5],[0,9.5],[-2,12],[-3.5,14.5],[-6,15.5],[-9,14],[-12,15.5],[-15,18],[-18,20.5],[-21,22],[-24,21],[-27,22.5],[-30,21],[-33,18],[-35,13],[-36.5,8]],"top":[[-36.5,-13],[1.5,-13],[2,-7],[0.5,-2.5],[-2,0.5],[-6,1.5],[-10,0],[-14,2],[-18,3.5],[-22,2],[-26,3],[-30,1],[-33.5,-1.5],[-36.5,-6]],"side":[[-13,0],[4,0],[3.5,5],[2,9],[-0.5,13],[-3.5,17],[-6.5,20.5],[-9.5,22.5],[-13,20]]},"voids":[{"plane":"front","polygon":[[-23,2.5],[-12.5,2.5],[-12,7],[-14,10.5],[-17.5,11.5],[-20.5,10],[-22.5,6.5]],"range":[-7,5]},{"plane":"front","polygon":[[-8,2.5],[-2,2.5],[-2,6.5],[-5,8],[-7.5,6.5]],"range":[-4,4]}]},
+      {"id":"isla-derecha","kind":"vertical-tower","voxelSize":0.75,"erosion":{"ridgeScale":0.068,"ridgeAmp":1.05,"poreScale":0.45,"poreAmp":0.31},"silhouettes":{"front":[[5.5,0],[34.5,0],[34.5,7],[33,11],[31,14],[29,18],[26.5,21],[23.5,23],[20.5,22],[18,19],[15,20],[12,17],[9,14.5],[6.8,10],[5.5,6]],"top":[[5.5,-13],[34.5,-13],[34.5,-5],[32,-1],[28,1.5],[24,0],[20,2.5],[16,1],[12,2.5],[8,0.5],[5.5,-4]],"side":[[-13,0],[3,0],[2.5,6],[0.5,11],[-2,16],[-5,20],[-8.5,23],[-11,22],[-13,18]]},"voids":[{"plane":"front","polygon":[[8,2.5],[15.5,2.5],[15,7.5],[12,10],[9,8]],"range":[-6,4]},{"plane":"front","polygon":[[24,13],[29,13.5],[28.5,17.5],[25,17]],"range":[-9,1]}]}
+    ],
+    "channel":{"xMin":1.5,"xMax":5.5},
+    "condition":{"coralline":0.18,"greenAlgae":0.42,"detritus":0.30,"cleanZonesY":16.0,"palette":{"rockBase":"#8a7358","rockOchre":"#b09a6e","rockPurple":"#7d5a6b","corallinePink":"#a86f84","algaeGreen":"#79864a","detritusDark":"#453b2c"}}
+  },
+  "livestock":[{"id":"ocellaris-1","species":"Amphiprion ocellaris","lengthCm":6.5,"personality":{"boldness":0.75,"cruise":1.0,"homeX":-6,"homeY":20,"homeZ":2}},{"id":"ocellaris-2","species":"Amphiprion ocellaris","lengthCm":5.5,"personality":{"boldness":0.45,"cruise":0.85,"homeX":-3,"homeY":18,"homeZ":4}}],
+  "pendingSpecies":[{"species":"Paracanthurus hepatus","count":1,"observedLengthCm":8},{"species":"Chrysiptera cf. parasema","count":1,"observedLengthCm":5}],
+  "corals":[],
+  "equipment":[{"id":"wavemaker-1","type":"wavemaker","position":[33,22,-9],"rotation":[0,-0.5,0]},{"id":"wavemaker-2","type":"wavemaker","position":[34,14,-6],"rotation":[0,-0.7,0]}]
+}

@@ -13,12 +13,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate JavaScript
         run: |
-          for f in app.js enhancements.js individuals.js experts.js catalog-v07.js commerce.js budget.js installations.js director.js sourcing.js virtual-reef.js candidate-lab.js water-intelligence.js proposals.js market-intelligence.js recovery-v16.js refinement-v17.js my-aquarium-v18.js my-aquarium-v19.js sw.js; do node --check "$f"; done
+          for f in app.js enhancements.js individuals.js experts.js catalog-v07.js commerce.js budget.js installations.js director.js sourcing.js virtual-reef.js candidate-lab.js water-intelligence.js proposals.js market-intelligence.js recovery-v16.js refinement-v17.js my-aquarium-v18.js my-aquarium-v19.js my-aquarium-v35.js sw.js twin-engine/version.js twin-engine/geometry-hull.js twin-engine/tank.js twin-engine/aquascape.js twin-engine/fauna.js twin-engine/engine.js; do node --check "$f"; done
       - name: Validate JSON
         run: |
           python -m json.tool data/aquarium.json >/dev/null
           python -m json.tool data/market.json >/dev/null
           python -m json.tool manifest.webmanifest >/dev/null
+          python -m json.tool twin-engine/aquascape.manifest.json >/dev/null
       - name: Validate aquarium runtime schema
         run: |
           node - <<'NODE'
@@ -26,7 +27,11 @@ jobs:
           for(const k of ['aquarium','livestock','equipment','parameters','automation','risks']) if(!d[k]) throw new Error('Missing '+k);
           if(!Array.isArray(d.parameters)||d.parameters.length<4) throw new Error('Invalid parameters');
           if(!d.automation.nero5||!d.automation.lighting) throw new Error('Invalid automation');
+          const t=require('./twin-engine/aquascape.manifest.json');
+          if(t.schemaVersion!==2) throw new Error('Invalid Twin schema');
+          if(!Array.isArray(t.scape?.islands)||t.scape.islands.length!==2) throw new Error('Expected two scape islands');
+          if(t.tank?.model?.indexOf('Fluval Flex 123')<0) throw new Error('Wrong tank model');
           NODE
       - name: Verify required files
         run: |
-          for f in index.html styles.css sw.js director.js installations.js commerce.js sourcing.js virtual-reef.js virtual-reef.css candidate-lab.js candidate-lab.css water-intelligence.js proposals.js market-intelligence.js recovery-v16.js refinement-v17.js my-aquarium-v18.js my-aquarium-v18.css my-aquarium-v19.js my-aquarium-v19.css; do test -f "$f"; done
+          for f in index.html styles.css sw.js director.js installations.js commerce.js sourcing.js virtual-reef.js virtual-reef.css candidate-lab.js candidate-lab.css water-intelligence.js proposals.js market-intelligence.js recovery-v16.js refinement-v17.js my-aquarium-v35.js twin-engine/version.js twin-engine/geometry-hull.js twin-engine/tank.js twin-engine/aquascape.js twin-engine/fauna.js twin-engine/engine.js twin-engine/aquascape.manifest.json; do test -f "$f"; done
