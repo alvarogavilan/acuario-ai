@@ -1,0 +1,11 @@
+{
+  "version": 42,
+  "tasks": [
+    {"id":"rear-safe","title":"Revisar parte trasera","priority":1,"mode":"zone","position":[0,20,-18],"size":[70,34,3],"view":"front","message":"Revisar la franja trasera: salitre, cables, fuentes y bucles antigoteo sin mover la urna."},
+    {"id":"light-plan","title":"Revisar luz y tapa","priority":2,"mode":"point","position":[0,50,0],"view":"front","message":"Zona superior de trabajo para luz y tapa. La pantalla debe quedar fijada de forma independiente antes de retirar la tapa."},
+    {"id":"temp-control","title":"Colocar sonda","priority":3,"mode":"point","position":[-30,25,-12],"view":"front","message":"Zona propuesta para la sonda: circulación representativa y separada de fuentes directas de calor o frío."},
+    {"id":"nero","title":"Orientar Nero 5","priority":4,"mode":"flow","position":[38,25,-5],"direction":[-1,-0.05,0.22],"view":"front","message":"Dirección de flujo propuesta para Nero 5; evitar chorro continuo directo sobre arena o animales."},
+    {"id":"eheim","title":"Revisar EHEIM","priority":5,"mode":"point","position":[-30,5,-16],"view":"front","message":"Referencia de la zona de filtración y mangueras; continuar después con la guía visual específica del filtro."},
+    {"id":"substrate-front-right","title":"Sifonado parcial frontal derecho","priority":6,"mode":"zone","position":[21,0.45,13],"size":[25,0.7,15],"view":"front","message":"Trabajar solo esta zona del sustrato en esta sesión; no remover todo el fondo de una vez."}
+  ]
+}
