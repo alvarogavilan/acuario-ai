@@ -1,0 +1,1 @@
+Bee-snail reference image: Wikimedia Commons file `Engina mendicaria unilineata.jpg`, used as an external image source in the app with fallback handling. The app does not treat the reference photo as a photograph of the user's individual animals.
