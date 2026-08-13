@@ -2,19 +2,55 @@
   "$comment": "UNIDADES EN CENTÍMETROS. Origen (0,0,0) = centro de la huella, y=0 en el cristal inferior interior. +x derecha, +y arriba, +z hacia el observador.",
   "schemaVersion": 2,
   "tank": {"model":"Fluval Flex 123 (32.5 US gal)","volumeL":123,"outerWidth":82.0,"outerDepth":40.0,"outerHeight":39.0,"glassThickness":0.6,"frontEdgeZ":8.0,"frontBow":12.0,"rearChamberDepth":7.0,"rimHeight":2.2,"waterLevel":34.0,"measured":false},
-  "sand": {"baseLevel":3.2,"backLevel":5.0,"duneAmplitude":0.7,"color":"#d8d3c2","detritusTint":"#9a9270","detritusAmount":0.22},
+  "sand": {"baseLevel":3.1,"backLevel":4.6,"duneAmplitude":0.55,"color":"#d7d0bd","detritusTint":"#8b805f","detritusAmount":0.28},
   "scape": {
     "source":"photo-estimate","provisional":true,
-    "$comment_confianza":"Geometría deducida de las fotos aportadas, no de un trazado ortogonal calibrado. Composición y alturas relativas son una aproximación; cotas absolutas conservan margen aproximado ±2-3 cm.",
-    "tracedFrom":["IMG_2583.jpeg","IMG_2663.jpeg","IMG_2664.jpeg","IMG_2670.jpeg"],
+    "$comment_confianza":"Recalibración manual v2 basada en las vistas frontal, laterales, oblicuas y superiores aportadas por el usuario en conversación, incluidas referencias con cinta métrica. Sigue siendo foto-estimación: no hay calibración fotogramétrica ni cámaras ortogonales conocidas.",
+    "tracedFrom":["conversation:frontal-with-tape","conversation:left-and-right-oblique","conversation:top-oblique-with-tape","conversation:side-views"],
     "islands":[
-      {"id":"isla-izquierda","kind":"horizontal-shelf","voxelSize":0.75,"erosion":{"ridgeScale":0.055,"ridgeAmp":1.2,"poreScale":0.42,"poreAmp":0.34},"silhouettes":{"front":[[-36.5,0],[1.5,0],[1.5,6.5],[0,9.5],[-2,12],[-3.5,14.5],[-6,15.5],[-9,14],[-12,15.5],[-15,18],[-18,20.5],[-21,22],[-24,21],[-27,22.5],[-30,21],[-33,18],[-35,13],[-36.5,8]],"top":[[-36.5,-13],[1.5,-13],[2,-7],[0.5,-2.5],[-2,0.5],[-6,1.5],[-10,0],[-14,2],[-18,3.5],[-22,2],[-26,3],[-30,1],[-33.5,-1.5],[-36.5,-6]],"side":[[-13,0],[4,0],[3.5,5],[2,9],[-0.5,13],[-3.5,17],[-6.5,20.5],[-9.5,22.5],[-13,20]]},"voids":[{"plane":"front","polygon":[[-23,2.5],[-12.5,2.5],[-12,7],[-14,10.5],[-17.5,11.5],[-20.5,10],[-22.5,6.5]],"range":[-7,5]},{"plane":"front","polygon":[[-8,2.5],[-2,2.5],[-2,6.5],[-5,8],[-7.5,6.5]],"range":[-4,4]}]},
-      {"id":"isla-derecha","kind":"vertical-tower","voxelSize":0.75,"erosion":{"ridgeScale":0.068,"ridgeAmp":1.05,"poreScale":0.45,"poreAmp":0.31},"silhouettes":{"front":[[5.5,0],[34.5,0],[34.5,7],[33,11],[31,14],[29,18],[26.5,21],[23.5,23],[20.5,22],[18,19],[15,20],[12,17],[9,14.5],[6.8,10],[5.5,6]],"top":[[5.5,-13],[34.5,-13],[34.5,-5],[32,-1],[28,1.5],[24,0],[20,2.5],[16,1],[12,2.5],[8,0.5],[5.5,-4]],"side":[[-13,0],[3,0],[2.5,6],[0.5,11],[-2,16],[-5,20],[-8.5,23],[-11,22],[-13,18]]},"voids":[{"plane":"front","polygon":[[8,2.5],[15.5,2.5],[15,7.5],[12,10],[9,8]],"range":[-6,4]},{"plane":"front","polygon":[[24,13],[29,13.5],[28.5,17.5],[25,17]],"range":[-9,1]}]}
+      {
+        "id":"isla-izquierda",
+        "kind":"horizontal-shelf-with-arch",
+        "voxelSize":0.62,
+        "erosion":{"ridgeScale":0.061,"ridgeAmp":1.35,"poreScale":0.48,"poreAmp":0.38},
+        "silhouettes":{
+          "front":[[-38,2],[-36.5,8],[-35,12],[-33,15],[-31,17],[-29,19],[-26,21],[-23,22],[-20,23],[-17,24.5],[-14,25.5],[-11,26],[-8,25.5],[-5.5,24],[-3,22],[-1,19],[0,16],[1,13],[1,10],[0,8],[-2,7],[-5,7],[-7,8],[-9,9],[-11,8],[-14,7],[-17,6],[-20,6],[-23,6],[-26,5],[-30,4],[-34,3],[-38,2]],
+          "top":[[-38,-12.5],[-34,-14],[-29,-14.5],[-24,-13],[-20,-14],[-15,-13],[-10,-12.5],[-5,-11.5],[-1,-9.5],[1,-6],[1,-2],[-1,1],[-5,2],[-10,1],[-15,3],[-20,3.5],[-25,2.5],[-30,1],[-34,-1],[-37,-5],[-38,-12.5]],
+          "side":[[-13,2],[-12,7],[-11,12],[-9,17],[-7,21],[-5,24],[-3,26],[-1,24],[1,21],[2,16],[2,11],[1,8],[-1,6],[-4,5],[-8,4],[-13,2]]
+        },
+        "voids":[
+          {"plane":"front","polygon":[[-29,2.8],[-25,2.7],[-21,3.2],[-17,3.5],[-13,3.4],[-10,4.2],[-9,6.5],[-10,8.8],[-12.5,10.8],[-15.5,11.8],[-19,11.2],[-22,10],[-25,8.5],[-27,6.8],[-29,4.8]],"range":[-7.5,5.5]},
+          {"plane":"front","polygon":[[-9,3],[-5,3],[-2,4],[-1.8,6.7],[-3.5,8.8],[-6,9.2],[-8,7.5]],"range":[-5,3.5]},
+          {"plane":"top","polygon":[[-31,-7],[-22,-9],[-15,-8],[-13,-4],[-17,-1],[-24,-1],[-30,-3]],"range":[6,15]}
+        ]
+      },
+      {
+        "id":"isla-derecha",
+        "kind":"vertical-tower-with-shelves",
+        "voxelSize":0.60,
+        "erosion":{"ridgeScale":0.067,"ridgeAmp":1.30,"poreScale":0.50,"poreAmp":0.36},
+        "silhouettes":{
+          "front":[[5,2],[7,7],[9,11],[11,13],[12,15],[14,17],[16,18],[18,20],[19,23],[20,26],[22,29],[24,31],[27,31.5],[29.5,30],[31,27],[32,24],[34,22],[35.5,18],[36,14],[35.5,10],[34,7],[32,5],[29,4],[26,4],[23,5],[20,6],[17,7],[14,7],[11,6],[8,5],[5,2]],
+          "top":[[5,-12.5],[9,-14],[14,-14.5],[19,-13.5],[24,-14],[29,-12.5],[33,-10.5],[36,-7],[36,-3],[34,0],[31,2],[27,2.5],[23,1],[19,2.8],[15,2.5],[11,1],[7,-1],[5,-5],[5,-12.5]],
+          "side":[[-13,2],[-12,8],[-10.5,14],[-9,20],[-8,25],[-6.5,29],[-4.5,31.5],[-2,30],[0,27],[1.5,22],[2.5,17],[2.5,12],[1.5,8],[-1,6],[-5,4],[-9,3],[-13,2]]
+        },
+        "voids":[
+          {"plane":"front","polygon":[[7.5,3],[10.5,3],[14,3.5],[16,5.5],[16,8],[14,10.5],[11.5,11],[9,9],[7.5,6]],"range":[-7,4]},
+          {"plane":"front","polygon":[[16,10],[20,10.5],[23,12],[23.5,14.5],[21.5,16.5],[18.5,16],[16.5,14]],"range":[-5,4]},
+          {"plane":"front","polygon":[[24,18],[27,18.5],[30,19.5],[30,22],[28,24],[25.5,23.5],[24,21]],"range":[-9,1.5]},
+          {"plane":"top","polygon":[[10,-8],[17,-10],[23,-9],[25,-5],[22,-2],[16,-1],[11,-3]],"range":[7,16]}
+        ]
+      }
     ],
-    "channel":{"xMin":1.5,"xMax":5.5},
-    "condition":{"coralline":0.18,"greenAlgae":0.42,"detritus":0.30,"cleanZonesY":16.0,"palette":{"rockBase":"#8a7358","rockOchre":"#b09a6e","rockPurple":"#7d5a6b","corallinePink":"#a86f84","algaeGreen":"#79864a","detritusDark":"#453b2c"}}
+    "channel":{"xMin":1.0,"xMax":5.5},
+    "condition":{"coralline":0.25,"greenAlgae":0.34,"detritus":0.38,"cleanZonesY":19.0,"palette":{"rockBase":"#765c43","rockOchre":"#a88458","rockPurple":"#77506b","corallinePink":"#a95f7e","algaeGreen":"#66723f","detritusDark":"#3c3124"}}
   },
-  "livestock":[{"id":"ocellaris-1","species":"Amphiprion ocellaris","lengthCm":6.5,"personality":{"boldness":0.75,"cruise":1.0,"homeX":-6,"homeY":20,"homeZ":2,"pairWith":"ocellaris-2"}},{"id":"ocellaris-2","species":"Amphiprion ocellaris","lengthCm":5.5,"personality":{"boldness":0.45,"cruise":0.85,"homeX":-3,"homeY":18,"homeZ":4,"pairWith":"ocellaris-1"}},{"id":"blue-tang-1","species":"Paracanthurus hepatus","lengthCm":8,"confidence":0.99,"$comment":"Vivo en el acuario real (ver data/aquarium.json). Renderer propio en estado BETA: geometría/color no validados aún en dispositivo real.","personality":{"boldness":0.5,"cruise":1.1,"homeX":18,"homeY":16,"homeZ":-2}},{"id":"blue-yellow-1","species":"Chrysiptera parasema","lengthCm":5,"confidence":0.88,"$comment":"Identificación visual probable (cf. parasema); vivo en el acuario real. Renderer propio en estado BETA: geometría/color no validados aún en dispositivo real.","personality":{"boldness":0.4,"cruise":0.8,"homeX":-15,"homeY":15,"homeZ":3}}],
+  "livestock":[
+    {"id":"ocellaris-1","species":"Amphiprion ocellaris","lengthCm":6.5,"personality":{"boldness":0.75,"cruise":1.0,"homeX":-6,"homeY":20,"homeZ":2,"pairWith":"ocellaris-2"}},
+    {"id":"ocellaris-2","species":"Amphiprion ocellaris","lengthCm":5.5,"personality":{"boldness":0.45,"cruise":0.85,"homeX":-3,"homeY":18,"homeZ":4,"pairWith":"ocellaris-1"}},
+    {"id":"blue-tang-1","species":"Paracanthurus hepatus","lengthCm":8,"confidence":0.99,"$comment":"Vivo en el acuario real (ver data/aquarium.json). Renderer propio en estado BETA: geometría/color no validados aún en dispositivo real.","personality":{"boldness":0.5,"cruise":1.1,"homeX":18,"homeY":16,"homeZ":-2}},
+    {"id":"blue-yellow-1","species":"Chrysiptera parasema","lengthCm":5,"confidence":0.88,"$comment":"Identificación visual probable (cf. parasema); vivo en el acuario real. Renderer propio en estado BETA: geometría/color no validados aún en dispositivo real.","personality":{"boldness":0.4,"cruise":0.8,"homeX":-15,"homeY":15,"homeZ":3}}
+  ],
   "corals":[],
   "equipment":[{"id":"wavemaker-1","type":"wavemaker","position":[33,22,-9],"rotation":[0,-0.5,0]},{"id":"wavemaker-2","type":"wavemaker","position":[34,14,-6],"rotation":[0,-0.7,0]}]
 }
