@@ -1,0 +1,10 @@
+(()=>{'use strict';
+const FOCUS_KEY='acuario-ai-twin-focus-v47';
+function dueSpatial(){const api=window.AQUARIUM_EQUIPMENT_CARE;if(!api?.rows)return[];return api.rows().filter(r=>r?.d?.due&&r?.c?.spatial)}
+function focusFirst(){if(!window.state||state.view!=='twin'||localStorage.getItem(FOCUS_KEY))return;const next=dueSpatial()[0];if(!next)return;localStorage.setItem(FOCUS_KEY,next.c.spatial);window.dispatchEvent(new StorageEvent('storage',{key:FOCUS_KEY,newValue:next.c.spatial}))}
+function card(){if(!window.state||state.view!=='twin'||!window.main||main.querySelector('[data-twin-today]'))return;const xs=dueSpatial();if(!xs.length)return;const next=xs[0],el=document.createElement('section');el.dataset.twinToday='1';el.style.cssText='margin:10px 0 12px;padding:12px 14px;border-radius:16px;border:1px solid rgba(255,199,93,.28);background:linear-gradient(180deg,rgba(66,47,18,.42),rgba(8,28,36,.88))';el.innerHTML=`<small style="color:#ffd06d;font-weight:900;letter-spacing:.08em">SIGUIENTE TAREA VISUAL</small><h3 style="margin:4px 0 3px">${next.c.title}</h3><p style="margin:0;color:#aebdc5;font-size:12px">${next.c.action}</p><button type="button" data-show-next-spatial style="margin-top:9px;width:100%">◎ Señalar ahora en Mi acuario</button>`;const anchor=main.querySelector('[data-canonical-twin="1"]');anchor?.after(el);el.querySelector('[data-show-next-spatial]').onclick=()=>{localStorage.setItem(FOCUS_KEY,next.c.spatial);window.dispatchEvent(new StorageEvent('storage',{key:FOCUS_KEY,newValue:next.c.spatial}));setTimeout(()=>window.__TWIN__?.setView?.('front'),50)}}
+function tick(){if(!window.state)return;if(state.view==='twin'){card();focusFirst()}}
+const prev=window.render;if(typeof prev==='function'){window.render=function(){prev();requestAnimationFrame(tick)}}
+window.addEventListener('load',()=>setTimeout(tick,250));new MutationObserver(tick).observe(document.documentElement,{childList:true,subtree:true});setInterval(tick,900);
+window.AQUARIUM_TWIN_TODAY={version:51,dueSpatial};
+})();
